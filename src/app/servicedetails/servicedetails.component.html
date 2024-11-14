@@ -1,0 +1,38 @@
+<div class="background-container">
+    <!-- Full-screen Background Image -->
+    <img src="https://thumbs.dreamstime.com/b/worker-uniform-disassembles-vehicle-engine-car-service-station-automobile-checking-inspection-professional-diagnostics-173424972.jpg" alt="Background Image" class="background-image">
+     
+      <div class="form-content">
+    <h2>Make Your Booking</h2>
+     
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <div class="form-group">
+    <label for="options">Choose an option:</label>
+    <select id="options" class="form-control" [(ngModel)]="selectedOption" name="option" (change)="onOptionChange()" required>
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+    </select>
+    </div>
+     
+          <!-- Time Slot Dropdown appears only after an option is selected -->
+    <div *ngIf="selectedOption">
+    <div class="form-group">
+    <label for="timeSlot">Choose a time slot:</label>
+    <select id="timeSlot" class="form-control" [(ngModel)]="selectedTimeSlot" name="timeSlot" required>
+    <option value="" disabled>Select a time slot</option>
+    <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+    </select>
+    </div>
+    </div>
+     
+          <button type="submit" class="btn btn-primary" [disabled]="!selectedTimeSlot">Submit Booking</button>
+    </form>
+     
+        <!-- Show confirmation after submission -->
+    <div *ngIf="submitted" class="confirmation-message">
+    <p>Your booking for <strong>{{ selectedOption }}</strong> at <strong>{{ selectedTimeSlot }}</strong> has been confirmed!</p>
+    </div>
+    </div>
+    </div>
+    
+    has context menu

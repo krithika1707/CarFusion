@@ -1,0 +1,185 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Basic Body Styling */
+body {
+  font-family: 'Poppins', sans-serif;  /* Use Poppins for modern clean fonts */
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Full-screen background image section */
+.welcome-section {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-section .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9; /* Slightly dim the background image for better text visibility */
+  z-index: -1;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+  color: #333; /* Default text color to black */
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  border-radius: 15px;  /* Rounded corners for the container */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow effect for a floating appearance */
+}
+
+/* Heading Styling */
+.welcome-section h1 {
+  font-size: 70px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #2c3e50; /* Dark color for better contrast */
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for readability */
+}
+
+/* Intro Text Styling */
+.welcome-section .intro-text {
+  font-size: 22px;
+  color: #2c3e50; /* Dark color for better contrast */
+  max-width: 800px;
+  margin: 0 auto;
+  font-weight: 400;
+  line-height: 1.8;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Service Cards Container */
+.service-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  padding: 40px 0;
+  position: relative;
+  z-index: 2;
+  margin-top: 30px;
+}
+
+.service-card {
+  flex: 1;
+  background-color: #ffffff;  /* Solid white background for cards */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  border: 1px solid #ecf0f1;
+}
+
+.service-card h2 {
+  font-size: 28px;
+  color: #34495e;
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: 1px; /* Slight letter spacing for elegance */
+}
+
+.service-card p {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.service-card a {
+  font-size: 16px;
+  color: #2980b9;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #2980b9;
+  padding: 12px 24px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  text-transform: uppercase; /* Uppercase text for action buttons */
+}
+
+.service-card a:hover {
+  background-color: #2980b9;
+  color: #fff;
+  border-color: #1a6fa0;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional Styling for Hover Effects */
+.service-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-card h2, .service-card p {
+  transition: color 0.3s ease;
+}
+
+.service-card a {
+  margin-top: auto; /* Push button to the bottom */
+  background-color: #2980b9;
+  color: #fff;
+  font-size: 18px;
+  padding: 12px 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.4s ease;
+}
+
+.service-card a:hover {
+  background-color: #1a6fa0;
+  color: #fff;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  /* Stack the cards on small screens */
+  .service-container {
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+  }
+
+  .service-card {
+    margin-bottom: 20px;
+    text-align: center;
+    height: auto;
+  }
+
+  .welcome-section h1 {
+    font-size: 45px;
+  }
+
+  .welcome-section .intro-text {
+    font-size: 18px;
+  }
+}
