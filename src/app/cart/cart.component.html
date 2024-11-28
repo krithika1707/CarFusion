@@ -1,0 +1,30 @@
+<div class="cart-container">
+    <h2>Your Bookings</h2>
+     
+      <div *ngIf="cartItems.length === 0" class="empty-cart">
+        No Cars have been Selected.
+    </div>
+     
+      <div class="cart-items">
+    <div *ngFor="let car of cartItems" class="cart-item">
+    <div class="cart-image-container">
+    <img [src]="car.image" alt="{{ car.model }}" class="cart-image">
+    </div>
+    <div class="cart-details">
+    <h3>{{ car.model }}</h3>
+    <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
+    <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
+    <p><strong>Owners:</strong> {{ car.owners }}</p>
+    <p><strong>Segment:</strong> {{ car.segment }}</p>
+    <button (click)="removeFromCart(car)">Remove from Bookings</button>
+    </div>
+    </div>
+    </div>
+     
+      <div *ngIf="cartItems.length > 0" class="cart-total">
+    <p><strong>Total:</strong> ₹{{ getTotalPrice() | number:'1.0-0' }}</p>
+    <button (click)="booking()" class="checkout-btn" [disabled]="cartItems.length === 0">Confirm your Bookings</button>
+    </div>
+    </div>
+    
+  

@@ -1,14 +1,17 @@
-/* General Styles */
+/* Service component css */
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%; /* Ensure full viewport height */
+    height: 100%;
     font-family: 'Arial', sans-serif;
     color: #fff;
+    background-color: #f4f4f9;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden;
+    /* background: url('path_to_your_car_image.jpg') no-repeat center center fixed;
+  background-size: cover; */
   }
    
   .background-container {
@@ -19,20 +22,33 @@ html, body {
     justify-content: center;
     align-items: center;
   }
+  .txts{
+    
+    font-size: 70px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #2c3e50;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  }
    
+  .second{
+    font-weight: 900;
+    color: #2c3e50;
+  }
   .background-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 220%;
-    object-fit: cover; /* Make sure the image covers the entire screen */
-    z-index: -1; /* Send the image behind the content */
-  }
+    object-fit: cover;
+    z-index: -1; 
    
-  /* Content Styling */
+
   .form-content {
-    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    background: rgba(0, 0, 0, 0.8); 
     padding: 40px;
     border-radius: 8px;
     max-width: 500px;
@@ -50,8 +66,7 @@ html, body {
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   }
-   
-  /* Form Elements */
+
   .form-group {
     margin-bottom: 20px;
   }
@@ -76,7 +91,7 @@ html, body {
   }
    
   select:focus {
-    border-color: #007bff; /* Highlight the select box when focused */
+    border-color: #007bff;
     outline: none;
   }
    
@@ -115,8 +130,7 @@ html, body {
   .form-control {
     box-sizing: border-box;
   }
-   
-  /* Responsive Styles */
+
   @media (max-width: 768px) {
     .form-content {
       padding: 20px;
@@ -130,4 +144,45 @@ html, body {
     button {
       font-size: 1rem;
     }
+  }
+
+  }
+  .booking-form {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  
+  }
+ 
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+ 
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+ 
+  button:disabled {
+    background-color: #ccc;
+  }
+ 
+  button {
+    background-color: #4574ca;
+    color: white;
+    cursor: pointer;
+  }
+ 
+  button:hover {
+    background-color: #4574ca;
+  }
+ 
+  option:disabled {
+    background-color: #f0f0f0;
   }
