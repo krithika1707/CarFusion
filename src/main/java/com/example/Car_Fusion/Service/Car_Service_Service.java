@@ -17,10 +17,26 @@ public class Car_Service_Service {
     ICustomer_Details_Repository customer_details_repository;
     public Car_service addServices(Car_service service)
     {
-        long ids=service.getDetails().getCustomer_id();
-        Optional<Customer_Details> details=customer_details_repository.findById(ids);
-        service.setDetails(details.get());
-        return carServiceRepository.save(service);
+       // long ids=service.getDetails().getCustomer_id();
+        //Optional<Customer_Details> details=customer_details_repository.findById(ids);
+        //service.setDetails(details.get());
+        //return carServiceRepository.save(service);
+
+        ////
+
+        long ids = service.getDetails().getCustomer_id();
+
+        Optional<Customer_Details> details = customer_details_repository.findById(ids);
+
+        if (details.isPresent()) {
+            service.setDetails(details.get());
+            return carServiceRepository.save(service);
+        } else {
+            // If no customer details are found, handle the error appropriately
+            throw new RuntimeException("Customer with ID " + ids + " not found.");
+        }
+        ///
+
     }
     public List<Car_service>getAllDats()
     {

@@ -22,7 +22,7 @@ public class Customer_Details_Log_In {
         try {
             Customer_Details details1 = detailsService.checkLogins(dao);
             if (details1 != null) {
-                return new ResponseEntity<>(HttpStatus.ACCEPTED);
+                return new ResponseEntity<>(details1,HttpStatus.ACCEPTED);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

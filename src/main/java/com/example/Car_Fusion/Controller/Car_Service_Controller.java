@@ -1,5 +1,4 @@
 package com.example.Car_Fusion.Controller;
-
 import com.example.Car_Fusion.Entity.Car_service;
 import com.example.Car_Fusion.Service.Car_Service_Service;
 import jakarta.persistence.Entity;
@@ -16,6 +15,7 @@ public class Car_Service_Controller
 {
     @Autowired
     Car_Service_Service service1;
+
     @PostMapping("/add")
     public ResponseEntity<Object>addServices(@RequestBody Car_service carService)
     {
