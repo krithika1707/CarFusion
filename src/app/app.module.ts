@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { CarResaleComponent } from './car-resale/car-resale.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Customer } from './customer';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()

@@ -32,6 +32,14 @@ export class HomeComponent {
     this.router.navigate(['/carresale']);
   }
 
+  openTestDrive(target: string) {
+    console.log('Redirecting to resale with target:', target);
+    // Optionally, store the target component in local storage or take other actions
+    localStorage.setItem('targetComponent', target);
+
+    this.router.navigate(['/testdrive']);
+  }
+
 }
 
 

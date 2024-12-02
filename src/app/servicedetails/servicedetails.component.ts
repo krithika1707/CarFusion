@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { CarServiceServiceService } from './car-service-service.service';
+import { convertToParamMap, Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
+import { CustomerServiceService } from '../customer-service.service';
 
 @Component({
   selector: 'app-servicedetails',
@@ -8,44 +12,25 @@ import { NgModule } from '@angular/core';
   styleUrl: './servicedetails.component.css'
 })
 export class ServicedetailsComponent {
-
-  timeSlotsMap: { [key: string]: string[] } = {
-    'Oil Change and Filter Replacement': ['9:00 AM', '10:00 AM', '11:00 AM'],
-    'Brake Inspection and Service': ['12:00 PM', '1:00 PM', '2:00 PM'],
-    'Tire Rotation and Alignment': ['3:00 PM', '4:00 PM', '5:00 PM'],
-    'Battery Check and Replacement': ['6:00 PM', '7:00 PM', '8:00 PM']
-  };
- 
-  bookedSlots: { [date: string]: string[] } = {
-    '2024-11-18': ['10:00 AM', '1:00 PM'],
-    '2024-11-19': ['3:00 PM', '6:00 PM']  
-  };
- 
+  constructor(private carservice:CarServiceServiceService,private router:Router,private customerobj:CustomerServiceService){}
+  availableTimeSlots:String[]=[] ;
+ show:boolean=false;
 
   selectedDate: string | null = null;
-  selectedTimeSlot: string | null = null;
-  availableTimeSlots: string[] = [];
-  submitted: boolean = false;
- 
+  selectedTimeSlot!: string;
   
+  submitted: boolean = false;
+  flag:number=0;
+  
+  timeslots=['9:00 AM', '10:00 AM', '07:00 PM'];
   minDate: string = new Date().toISOString().split('T')[0];
-
+  maxDate: string = new Date(new Date().setDate(new Date().getDate() + 20)).toISOString().split('T')[0];
   onDateChange() {
     if (this.selectedDate) {
-      this.availableTimeSlots = this.timeSlotsMap['Oil Change and Filter Replacement'] || []; 
-
-      this.availableTimeSlots = this.availableTimeSlots.filter(slot => !this.isSlotBooked(slot));
-      this.selectedTimeSlot = null;
+       this.availableTimeSlots=[...this.timeslots];
     }
   }
 
-  isSlotBooked(slot: string): boolean {
-    if (this.selectedDate && this.bookedSlots[this.selectedDate]) {
-      return this.bookedSlots[this.selectedDate].includes(slot);
-    }
-    return false;
-  }
- 
 
   onTimeSlotChange() {
 
@@ -53,17 +38,50 @@ export class ServicedetailsComponent {
 
   onSubmit(): void {
     if (this.selectedDate && this.selectedTimeSlot) {
-      if (!this.isSlotBooked(this.selectedTimeSlot)) {
- 
-        if (!this.bookedSlots[this.selectedDate]) {
-          this.bookedSlots[this.selectedDate] = [];
-        }
-        this.bookedSlots[this.selectedDate].push(this.selectedTimeSlot);
- 
-        this.submitted = true;
+
+        this.saveBookings();
+       
       } else {
+
         alert('This time slot is already booked. Please choose another slot.');
       }
     }
+  
+
+  formatTimeSlot(time: string): string {
+    // Check if the time contains 'AM' or 'PM' and remove it
+    const timeWithoutAMPM = time.replace(/\s?AM|\s?PM/, '').trim(); // Remove AM or PM
+    return timeWithoutAMPM;  // Return the time in HH:mm format
   }
+  getFormattedDateTime(): string {
+    const formattedTime = this.formatTimeSlot(this.selectedTimeSlot);
+    return `${this.selectedDate}T${formattedTime}`;
+  }
+  
+    saveBookings(this: any) {
+
+    console.log(this.getFormattedDateTime());
+    console.log(this.customerobj.cid);
+    const dd=new Date(this.getFormattedDateTime());
+    console.log(dd);
+    this.carservice.confirm(dd,this.customerobj.cid);
+    this.carservice.confirmBooking().subscribe(
+      (response:any)=>{
+           console.log("passed");
+           console.log(response);
+           this.submitted = true;
+           
+      },
+      (error:any)=>{
+          this.flag=1;
+      }
+
+    )
+    
+  }
+
 }
+
+
+
+
