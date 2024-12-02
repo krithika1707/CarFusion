@@ -18,7 +18,7 @@
       <button type="submit">Sign Up</button>
   </form>
    
-    <!-- Show Login form if isLogin is true -->
+   
   <form *ngIf="isLogin" (ngSubmit)="onLoginSubmit()">
   <label for="name">Username</label>
   <input type="text" [(ngModel)]="login.customer_mail_id" name="name" required />
