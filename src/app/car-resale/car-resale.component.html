@@ -1,0 +1,63 @@
+<div class="heading-container">
+    <h1 class="txts">Car Resale</h1>
+  </div>
+   
+  <div class="filter-container">
+    <div class="filter-item">
+      <label for="priceRange">Price Range:</label>
+      <input
+        type="range"
+        id="priceRange"
+        min="0"
+        max="1800000"
+        step="100"
+        [(ngModel)]="price"
+        (input)="onPriceChange()"
+      >
+      <span id="priceValue">₹{{ price | number:'1.0-0' }}</span>
+    </div>
+   
+    <div class="filter-item">
+      <label>Car Segment:</label>
+      <div class="radio-buttons">
+        <label>
+          <input type="radio" name="segment" [(ngModel)]="selectedSegment" value="Compact" (change)="onSearch()"> Compact
+        </label>
+        <label>
+          <input type="radio" name="segment" [(ngModel)]="selectedSegment" value="Sedan" (change)="onSearch()"> Sedan
+        </label>
+        <label>
+          <input type="radio" name="segment" [(ngModel)]="selectedSegment" value="SUV" (change)="onSearch()"> SUV
+        </label>
+        <label>
+          <input type="radio" name="segment" [(ngModel)]="selectedSegment" value="Electric" (change)="onSearch()"> Electric
+        </label>
+        <label>
+          <input type="radio" name="segment" [(ngModel)]="selectedSegment" value="Hatchback" (change)="onSearch()"> Hatchback
+        </label>
+        <label>
+          <input type="radio" name="segment" [(ngModel)]="selectedSegment" value="MPV" (change)="onSearch()"> MPV
+        </label>
+      </div>
+    </div>
+   
+    <button (click)="onSearch()">Search</button>
+  </div>
+   
+  <div class="car-list">
+    <div *ngFor="let car of filteredCars" class="car-item">
+      <img [src]="car.image" alt="{{ car.model }}" class="car-image">
+      <div class="car-details">
+        <h3>{{ car.model }}</h3>
+        <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
+        <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
+        <p><strong>Owners:</strong> {{ car.owners }}</p>
+        <p><strong>Segment:</strong> {{ car.segment }}</p>
+        <button (click)="addToCart(car)">Book</button>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <button routerLink="/cart" class="small-btn">Go to Bookings</button>
+  </div>

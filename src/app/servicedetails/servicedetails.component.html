@@ -1,0 +1,49 @@
+
+<div style="width:100%; height: 100vh; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+  <div style="justify-content: center; align-items: center; display: flex; width: 100%;height: 100px; margin-top: 50px;">
+    <h2 class="txts">General Services</h2>
+  </div>
+  <div class="booking-form">
+    
+    <div>
+      <label for="appointmentDate">Select Date:</label>
+      <input
+        type="date"
+        id="appointmentDate"
+        [(ngModel)]="selectedDate"
+        (change)="onDateChange()"
+        [min]="minDate"
+      />
+    </div>
+ 
+ 
+    <div>
+      <label for="timeSlot">Select Time Slot:</label>
+      <select
+        id="timeSlot"
+        [(ngModel)]="selectedTimeSlot"
+
+      >
+        <option value="" disabled>Select Time Slot</option>
+        <option *ngFor="let slot of availableTimeSlots" [value]="slot" >
+          {{ slot }}
+        </option>
+      </select>
+    </div>
+ 
+  
+    <div>
+      <button (click)="onSubmit()" [disabled]="!selectedDate || !selectedTimeSlot">
+        Submit
+      </button>
+    </div>
+ 
+    <div *ngIf="submitted">
+      <div *ngIf="flag">
+        
+      <p>Your appointment has been successfully booked for {{ selectedDate }} at {{ selectedTimeSlot }}.</p>
+      </div>
+    </div>
+  </div>
+</div>   
+  

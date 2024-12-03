@@ -1,0 +1,38 @@
+<!-- home.component.html -->
+
+<div class="home">
+  <h1>Welcome to Home Page</h1>
+  
+  <!-- Add a Logout Button -->
+  <button (click)="logout()">Logout</button>
+</div>
+
+
+<div class="welcome-section">
+  <div class="content-wrapper">
+    <div class="text-overlay">
+      <h1>Car Fusion</h1>
+      <p class="intro-text">We offer a wide range of services to keep your car in top shape, from maintenance to resale and test drives.</p>
+    </div>
+
+    <div class="service-container">
+      <div class="service-card">
+        <h2>Service</h2>
+        <p>Get your car serviced by professional mechanics.</p>
+        <a (click)="openService('servicedetails')">Book Service</a>
+      </div>
+
+      <div class="service-card">
+        <h2>Resale</h2>
+        <p>Find the best deals on used cars.</p>
+        <a (click)="openResale('carresale')">Explore Resale Cars</a>
+      </div>
+
+      <div class="service-card">
+        <h2>Test Drive</h2>
+        <p>Book a test drive to experience the car of your dreams.</p>
+        <a (click)="openTestDrive('testdrive')">Schedule a Test Drive</a>
+      </div>
+    </div>
+  </div>
+</div>
