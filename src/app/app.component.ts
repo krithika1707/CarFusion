@@ -8,13 +8,5 @@ import { Car } from './car-resale/car-resale.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  // constructor(public cartService: CartService) {}
  
-  // addToCart(car: Car) {
-  //   this.cartService.addToCart(car);
-  // }
- 
-  // getCart() {
-  //   return this.cartService.getCart();
-  // }
 }

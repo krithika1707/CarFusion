@@ -1,8 +1,6 @@
-<!-- login.component.html -->
 
 <div class="modal">
   
-  <!-- Show Sign Up form if isLogin is false -->
   <form *ngIf="!isLogin" (ngSubmit)="onSignUpSubmit()">
     <label for="name">Customer</label>
     <input type="text" [(ngModel)]="user.customer_name" name="name" required />
@@ -19,7 +17,6 @@
     <button type="submit">Sign Up</button>
   </form>
 
-  <!-- Show Login form if isLogin is true -->
   <form *ngIf="isLogin" (ngSubmit)="onLoginSubmit()">
     <label for="name">Customer Id</label>
     <input type="text" [(ngModel)]="logins.username" name="name" required />
