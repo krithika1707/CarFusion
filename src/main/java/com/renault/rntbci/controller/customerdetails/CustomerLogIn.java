@@ -1,5 +1,4 @@
 package com.renault.rntbci.controller.customerdetails;
-
 import com.renault.rntbci.common.CustomerDAO;
 import com.renault.rntbci.dbservice.customerdetails.entity.CustomerDetails;
 import com.renault.rntbci.service.customerdetailsservice.CustomerDetailsService;
@@ -16,17 +15,21 @@ public class CustomerLogIn {
     @Autowired
     CustomerDetailsService detailsService;
     @PostMapping("/go")
-    public ResponseEntity<Object> checkUsers(@RequestBody CustomerDAO dao) {
+    public ResponseEntity<Object> checkUsers(@RequestBody CustomerDAO dao)
+    {
         try {
             CustomerDetails details1 = detailsService.checkLogins(dao);
-            if (details1 != null) {
+            if (details1 != null)
+            {
                 return new ResponseEntity<>(details1,HttpStatus.ACCEPTED);
-            } else {
+            } else
+            {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         }
     }
-
 }
