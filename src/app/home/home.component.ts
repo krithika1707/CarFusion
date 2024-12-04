@@ -37,7 +37,7 @@ export class HomeComponent {
     // Optionally, store the target component in local storage or take other actions
     localStorage.setItem('targetComponent', target);
 
-    this.router.navigate(['/carresale']);
+    this.router.navigate(['/testdrive']);
   }
 
 }

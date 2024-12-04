@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ServicedetailsComponent {
   constructor(private service: CarServiceService, private customer_id: CustomerIdService,private router:Router) {
+     
   }
 timeslots=['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '6:00 PM'];
   flag:boolean=false;
@@ -19,7 +20,11 @@ timeslots=['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '6:00 PM'];
   selectedTimeSlot: string | null = null;
   availableTimeSlots: string[] = [];
   submitted: boolean = false;
-  minDate: string = new Date().toISOString().split('T')[0];
+   ab=new Date().getFullYear();
+   bc=(new Date().getMonth()+1).toString().padStart(2,"0");
+       ca=new Date().getDate().toString().padStart(2,"0");
+       abc=`${this.ab}-${this.bc}-${this.ca}`;
+  minDate: string = this.abc;
   onDateChange() {
     if (this.selectedDate) {
       this.availableTimeSlots = [...this.timeslots]
@@ -42,10 +47,18 @@ timeslots=['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '6:00 PM'];
               console.log(ne);
               this.flag=true;
               alert("Your Slot have been Booked")
+
+              console.log(new Date().getDate()) 
+              console.log("min:"+new Date().toISOString());
               this.router.navigate(['/home']);
         
             },error:(error)=>{
               alert("You Already Booked!!!!!!!")
+              console.log("min:"+new Date().toISOString().split("T")[0]);
+    console.log(this.abc);
+              
+              //const ss=new Date(this.selectedDate);
+             console.log();
               console.log(error)
             }
           }
