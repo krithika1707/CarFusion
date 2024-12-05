@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CarServiceService {
+  getCarsBySegment(segment: string) {
+    throw new Error('Method not implemented.');
+  }
 
   url:string="http://localhost:8080/car_services/add"
   constructor(private access:HttpClient) { }

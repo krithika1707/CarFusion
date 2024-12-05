@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'carresale',component: CarResaleComponent},
   {path:'cart',component: CartComponent},
   {path:'testdrive',component:TestdriveComponent},
-  { path: 'car-models/:segment', component: CarmodelsComponent },
+  { path: 'car-models', component: CarmodelsComponent },
   { path: '**', redirectTo: '' }
 
 ];

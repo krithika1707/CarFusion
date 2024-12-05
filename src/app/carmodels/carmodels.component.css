@@ -1,70 +1,103 @@
+/* General container for the page */
 .car-models-container {
-    text-align: center;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px; 
-    padding: 20px;
-    max-width: 100%;
-    height: 100%; 
-    min-height: 400px; 
-    overflow: hidden; 
-    box-sizing: border-box;
-  }
-  h2 {
-    font-size: 50px;
-      font-weight: 900;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      color: #2c3e50;
-      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1)
-  }
-  
-  .car-card {
-    display: inline-block;
-    width: 250px;
-    height:400px; 
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    overflow: hidden; 
-  }
-  
-  .car-image {
-    width: 100%; 
-    height: 200px; 
-    object-fit: cover;  
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .car-info {
-    margin-top: 10px;
-  }
-  
-  button {
-    background-color: #2980b9;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  
-  p {
-    font-size: 16px;
-    color: #555;
-  }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Styling for segment selector */
+.segment-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.segment-selector label {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.segment-selector select {
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Container for the car models */
+.car-models-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Individual car card styling */
+.car-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.car-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.car-details {
+  padding: 20px;
+}
+
+.car-details h2 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.car-details p {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Time slot dropdown and styling */
+.time-slot-dropdown {
+  margin-bottom: 15px;
+}
+
+.time-slot-dropdown select {
+  padding: 8px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+/* Button styling */
+.book-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-btn:disabled {
+  background-color: #ddd;
+}
+
+.book-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}

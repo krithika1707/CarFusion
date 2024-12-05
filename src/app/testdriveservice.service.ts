@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class TestdriveserviceService
  {
   private segment_id!: number;
+
   setSegmentId(id: number) {
     this.segment_id = id;
   }
@@ -15,9 +17,15 @@ export class TestdriveserviceService
     return this.segment_id;
   }
   url:string="http://localhost:8080/testdrive/search?"
+  
   constructor(private access:HttpClient) { }
-getAllSegments()
+
+getAllSegments():Observable<any>{
 {
-return this.access.get(`${this.url}ids=${this.getSegmentId()}`)
+//return this.access.get(`${this.url}ids=${this.getSegmentId()}`)
+
+return this.access.get("http://localhost:8080/testdrive/search/ids=?");
+
 }
 }
+ }

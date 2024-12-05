@@ -1,6 +1,25 @@
-<div class="car-models-container">
-    <h2>Select Car Model</h2>
-  
+<div class="car-list">
+  <h2>Select car model</h2>
+  <div *ngFor="let car of carList" class="car-item">
+  <div class="car-image">
+  <img [src]="car.car_image" alt="{{ car.car_name }}">
+  </div>
+  <div class="car-details">
+  <h2>{{ car.car_name }}</h2>
+  <p>{{ car.description }}</p>
+  <div class="time-slots">
+  <strong>Available Test Drive Slots:</strong>
+  <ul>
+  <li *ngFor="let slot of car.time_slots">{{ slot }}</li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  </div>
+    <!-- <div *ngFor="let mod of carmod">
+      <button (click)="getid(mod.carModels)">{{mod.models}}</button> -->
+
+<!-- 
     <div *ngIf="carModels.length > 0">
       <div *ngFor="let car of carModels" class="car-card">
         <img [src]="car.image" alt="{{ car.model }}" class="car-image" />
@@ -29,4 +48,6 @@
     <div *ngIf="carModels.length === 0">
       <p>No car models available for this segment.</p>
     </div>
-  </div>
+  </div> -->
+
+

@@ -4,7 +4,7 @@
     
     
     <div class="button-container">
-      <button (click)="goToCarModels('5-seater')" class="left-button">SEDAN</button>
+      <!-- <button (click)="goToCarModels('5-seater')" class="left-button">SEDAN</button>
       <br>
       <br>
       <button (click)="goToCarModels('7-seater')" class="right-button">SUV</button>
@@ -14,6 +14,10 @@
       <button (click)="goToCarModels('5-seater')" >HatchBack</button>
       <br>
       <br>
-      <button (click)="goToCarModels('7-seater')" >Compact</button>
+      <button (click)="goToCarModels('7-seater')" >Compact</button> -->
+      <div *ngFor="let seg of segmentsarr">
+        <button (click)="getid(seg.segment_id)">{{seg.segment}}</button>
+
+      </div>
     </div>
   </div>
