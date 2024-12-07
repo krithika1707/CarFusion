@@ -12,7 +12,9 @@ export class CarServiceServiceService {
   obj!:any;
 
   private url="http://localhost:8080";
+  private timeslots="http://localhost:3000/days";
   confirm(date:Date,id:any){
+    
     this.obj={
       date_time:date,
       customerDetails:{
@@ -26,6 +28,16 @@ export class CarServiceServiceService {
   console.log(this.obj);
   console.log("finallys");
   return this.http.post<any>(`${this.url}/carservice/saveservicebooking`,this.obj);
+ }
+
+ getSlots():Observable<any>{
+  return this.http.get<any>(this.timeslots);
+ }
+
+ updateSlots(obj:any):Observable<any>{
+  console.log("updated");
+  console.log(obj.day);
+  return this.http.put(`${this.timeslots}/${obj.id}`,obj);
  }
   
 }

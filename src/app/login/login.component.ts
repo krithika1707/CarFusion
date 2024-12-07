@@ -4,6 +4,7 @@ import { CustomerDetails } from '../customer-details';
 import { CustomerdetailsServiceService } from './customerdetails-service.service';
 import { Customer } from '../customer';
 import { CustomerServiceService } from '../customer-service.service';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,9 @@ export class LoginComponent {
     password:''
   }
 
- constructor(private router: Router,private customerservice:CustomerdetailsServiceService,private customerobj:CustomerServiceService) {}
+ constructor(private router: Router,private customerservice:CustomerdetailsServiceService,private customerobj:CustomerServiceService
+  ,private localstorage:LocalStorageService
+ ) {}
  customer!:CustomerDetails;
 
 
@@ -88,6 +91,8 @@ export class LoginComponent {
           alert("Login successfully!!");
           console.log(response);
           this.customerobj.setCustomerId(response.customer_id);
+          this.localstorage.storeCustomerId(response.customer_id);
+        
          //console.log(response.customer_id);
           this.router.navigate(['/home']);
         },

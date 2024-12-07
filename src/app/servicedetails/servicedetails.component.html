@@ -27,7 +27,7 @@
         (change)="onTimeSlotChange()"
       >
         <option value="" disabled>Select Time Slot</option>
-        <option *ngFor="let slot of availableTimeSlots" [value]="slot" >
+        <option *ngFor="let slot of availableTimeSlots" [value]="slot">
           {{ slot }}
         </option>
       </select>

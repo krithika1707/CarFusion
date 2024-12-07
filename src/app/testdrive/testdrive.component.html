@@ -1,0 +1,12 @@
+<div class="test-drive-container">
+    <h2>Select the car segment</h2>
+    
+    <div class="button-container">
+    <div *ngFor="let segment of segments">
+        <button (click)="store(segment.segment_id)">
+           {{segment.segment_name}}
+        </button>
+
+    </div>
+    
+  </div>

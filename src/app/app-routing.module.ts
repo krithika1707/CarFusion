@@ -5,6 +5,8 @@ import { ServicedetailsComponent } from './servicedetails/servicedetails.compone
 import { CarResaleComponent } from './car-resale/car-resale.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
+import { TestdriveComponent } from './testdrive/testdrive.component';
+import { TestdrivemodelsComponent } from './testdrivemodels/testdrivemodels.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -12,8 +14,9 @@ const routes: Routes = [
   { path: 'servicedetails', component: ServicedetailsComponent}, 
   {path:'carresale',component: CarResaleComponent},
   {path:'cart',component: CartComponent},
-  { path: '**', redirectTo: '' }
-  // { path: '', redirectTo: '/login', pathMatch: 'full' }
+  
+  {path:'testdrivehome',component:TestdriveComponent},
+  {path:'testdrivemodels',component:TestdrivemodelsComponent}
 
 ];
 
