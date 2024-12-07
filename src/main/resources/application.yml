@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: car_fusion
+  datasource:
+    url: jdbc:postgresql://localhost:5432/car_Fusion
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+debug: true
