@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class CarServiceService {
 
   url:string="http://localhost:8080/car_services/add"
+  slot_url:string="http://localhost:3000/days";
   constructor(private access:HttpClient) { }
   args={};
   addServices(datetime:Date,id:any)
@@ -23,4 +24,13 @@ export class CarServiceService {
   {
     return this.access.post(this.url,this.args);
   }
+  getAllSlots()
+  {
+return this.access.get(this.slot_url);
+ }
+ updateSlots(id:any,obj:any)
+ {
+  console.log("ids:"+id);
+return this.access.put<any>(`${this.slot_url}/${id}`,obj);
+ }
 }

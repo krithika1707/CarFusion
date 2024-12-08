@@ -76,7 +76,22 @@ html, body {
     display: block;
     font-weight: 600;
   }
-   
+  button {
+    background-color: #2980b9;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover 
+  {
+    background-color: #1a6fa0;
+  }
+  
   select {
     width: 100%;
     padding: 12px;
@@ -158,7 +173,37 @@ html, body {
     display: block;
     margin: 10px 0 5px;
   }
- 
+ /* Marquee Styles */
+.marquee {
+  width: 100%;
+  background-color: #2980b9;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: #2980b9;
+  animation: marquee-scroll 10s linear infinite;
+}
+
+.marquee-text {
+  display: inline-block;
+  padding-right: 100%;
+}
+
+
   input, select, button {
     width: 100%;
     padding: 10px;

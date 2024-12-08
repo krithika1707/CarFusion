@@ -52,6 +52,8 @@ logins:LoginDetails={
     this.services.checkLogin(this.logins).subscribe({
       next: (response) => {
         this.customer_id.setCustomerId(response.customer_id);
+       //const id=this.customer_id.getCustomerId();
+        localStorage.setItem("customer_id",response.customer_id);
         console.log(`ans:${response}`);
         console.log(`ans:${response.customer_id}`);  
         alert("Welcome!!!!");  

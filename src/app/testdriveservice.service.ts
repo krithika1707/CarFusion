@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Segments } from './segments';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,21 @@ export class TestdriveserviceService
     return this.segment_id;
   }
   url:string="http://localhost:8080/testdrive/search?"
+  url_segment:string="http://localhost:8080/testdrive/segments/all";
+  url_bookings:string="http://localhost:8080/testdrive/booking/book"
   constructor(private access:HttpClient) { }
-getAllSegments()
+getAllSegments(id:any)
 {
-return this.access.get(`${this.url}ids=${this.getSegmentId()}`)
+return this.access.get(`${this.url}ids=${id}`)
+}
+getSegments()
+{
+  return this.access.get<[]>(this.url_segment);
+}
+
+saveBookings(obj:any)
+{
+  return this.access.post(this.url_bookings,obj);
 }
 }
+

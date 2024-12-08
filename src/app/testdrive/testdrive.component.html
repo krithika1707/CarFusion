@@ -1,19 +1,75 @@
-<div class="test-drive-container">
-  
-    <h2>Select the car segment</h2>
-    
-    
-    <div class="button-container">
-      <button (click)="goToCarModels('5-seater')" class="left-button">SEDAN</button>
-      <br>
-      <br>
-      <button (click)="goToCarModels('7-seater')" class="right-button">SUV</button>
-  
-      <br>
-      <br>6
-      <button (click)="goToCarModels('5-seater')" >HatchBack</button>
-      <br>
-      <br>
-      <button (click)="goToCarModels('7-seater')" >Compact</button>
+<div>
+
+  <!-- Tabs for selecting the segment -->
+  <div class="tabs">
+    <div
+      *ngFor="let segment of response"
+      class="tab"
+      [class.active]="selectedSegment === segment.segment_id"
+      (click)="onSelectSegment(segment.segment_id)"
+    >
+      {{ segment.segment }}
     </div>
   </div>
+
+
+
+
+
+  <!-- Display segment details based on the selected tab -->
+  <div *ngIf="selectedSegmentDetails">
+    <h3>Details for: {{ selectedSegmentDetails.segment }}</h3>
+    <p>{{ selectedSegmentDetails.description }}</p>
+    <ul>
+      <li *ngFor="let model of selectedSegmentDetails.models">
+        {{ model }}
+      </li>
+    </ul>
+  </div>
+  
+
+  <!-- Car models and booking -->
+  <div *ngIf="models.length > 0" class="car-models-container">
+    <h1>Select Car Model</h1>
+
+    <div class="car-models-list">
+      <div *ngFor="let car of models" class="car-card">
+        <div class="car-image">
+          <img [src]="car.car_image" alt="{{ car.car_name }}" />
+        </div>
+
+        <div class="car-details">
+          <h2>{{ car.car_name }}</h2>
+          <p>{{ car.description }}</p>
+
+          <div class="date">
+            <strong>Date:</strong>
+            <input type="date" [(ngModel)]="selectedDates[car.testdrive_id]" />
+          </div>
+
+          <div class="time-slots">
+            <strong>Available Test Drive Slots:</strong>
+            <select [(ngModel)]="selectedSlots[car.testdrive_id]">
+              <option *ngFor="let slot of car.time_slots" [value]="slot">
+                {{ slot }}
+              </option>
+            </select>
+          </div>
+
+          <button
+            class="book-btn"
+            [disabled]="!selectedDates[car.testdrive_id] || !selectedSlots[car.testdrive_id]"
+            (click)="bookTestDrive(car)"
+          >
+            Book Test Drive
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div>
+    <button class="back-button" (click)="goBack()">Back to Home</button>
+  </div>
+</div>

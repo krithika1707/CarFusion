@@ -33,7 +33,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets"
               }
             ],
             "styles": [
@@ -95,6 +95,10 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
+
+              "src/assets",
+              "src/favicon.ico",
+
               {
                 "glob": "**/*",
                 "input": "public"

@@ -1,11 +1,8 @@
-/* Home component Css */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 body {
   font-family: 'Poppins', sans-serif; 
@@ -15,6 +12,28 @@ body {
   overflow-x: hidden; 
 }
 
+.home {
+  position: relative; /* Position relative to place the logout button in the corner */
+  padding: 20px;
+}
+
+.home button {
+  position: absolute; /* Place the button absolutely inside the container */
+  top: 20px; /* Distance from the top */
+  right: 20px; /* Distance from the right */
+  background-color: #2980b9;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.home button:hover {
+  background-color: #1a6fa0; /* Button color on hover */
+}
 
 .welcome-section {
   position: relative;
@@ -50,7 +69,6 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
 }
 
-
 .welcome-section h1 {
   font-size: 70px;
   font-weight: 900;
@@ -70,7 +88,6 @@ body {
   line-height: 1.8;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
-
 
 .service-container {
   display: flex;
@@ -144,7 +161,7 @@ body {
 }
 
 .service-card a {
-  margin-top: auto; /* Push button to the bottom */
+  margin-top: auto;
   background-color: #2980b9;
   color: #fff;
   font-size: 18px;
@@ -161,7 +178,6 @@ body {
 
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
-  /* Stack the cards on small screens */
   .service-container {
     flex-direction: column;
     padding: 20px;

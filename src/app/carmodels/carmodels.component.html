@@ -1,32 +1,33 @@
 <div class="car-models-container">
-    <h2>Select Car Model</h2>
-  
-    <div *ngIf="carModels.length > 0">
-      <div *ngFor="let car of carModels" class="car-card">
-        <img [src]="car.image" alt="{{ car.model }}" class="car-image" />
-        
-        <div class="car-info">
-          <h3>{{ car.model }}</h3>
-          
-          <div *ngIf="car.showTimeSlotDropdown; else selectCar">
-            <label for="timeSlot">Select a Time Slot:</label>
-            <select [(ngModel)]="car.selectedTimeSlot" id="timeSlot" name="timeSlot">
-              <option *ngFor="let time of timeSlots" [value]="time">{{ time }}</option>
-              <br/>
-            </select>
-            <br/>
-            <button (click)="confirmTimeSlot(car)">Submit</button>
-          </div>
-  
-          <ng-template #selectCar>
-            <p>{{ car.description }}</p>
-            <button (click)="toggleTimeSlotDropdown(car)">Select</button>
-          </ng-template>
+  <h1>Select Car Model</h1>
+ 
+  <div class="car-models-list">
+    <div *ngFor="let car of models" class="car-card">
+      
+      <div class="car-image">
+        <img [src]="car.car_image" alt="{{ car.car_name }}">
+      </div>
+ 
+      <div class="car-details">
+        <h2>{{ car.car_name }}</h2>
+        <p>{{ car.description }}</p>
+ 
+        <div class="date">
+          <strong>Date:</strong>
+          <input type="date" [(ngModel)]="selectedDates[car.testdrive_id]" />
         </div>
+ 
+        <div class="time-slots">
+          <strong>Available Test Drive Slots:</strong>
+          <select [(ngModel)]="selectedSlots[car.testdrive_id]">
+            <option *ngFor="let slot of car.time_slots" [value]="slot">{{ slot }}</option>
+          </select>
+        </div>
+ 
+        <button class="book-btn" [disabled]="!selectedDates[car.testdrive_id] || !selectedSlots[car.testdrive_id]" (click)="bookTestDrive(car)">
+          Book Test Drive
+        </button>
       </div>
     </div>
-  
-    <div *ngIf="carModels.length === 0">
-      <p>No car models available for this segment.</p>
-    </div>
   </div>
+</div>

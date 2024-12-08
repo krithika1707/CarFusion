@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 export class CustomerIdService {
 
   constructor() { }
-  private customer_id!: number;
+  private customer_id!: string;
 
-  setCustomerId(id: number) {
+  setCustomerId(id: string) {
     this.customer_id = id;
   }
 
-  getCustomerId(): number | null {
+  getCustomerId(): string | null {
     return this.customer_id;
   }
 }
