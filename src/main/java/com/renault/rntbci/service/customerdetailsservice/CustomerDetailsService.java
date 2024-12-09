@@ -9,18 +9,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerDetailsService {
+public class CustomerDetailsService implements ICustomerDetailsImpl {
     @Autowired
     ICustomerRepository iCustomerDetailsRepository;
 
+    @Override
     public CustomerDetails postCustomerDetails(CustomerDetails details)
     {
         return iCustomerDetailsRepository.save(details);
     }
+    @Override
     public List<CustomerDetails>getAllDats()
     {
         return iCustomerDetailsRepository.findAll();
     }
+    @Override
     public CustomerDetails checkLogins(CustomerDAO customerDao)
     {
       return  iCustomerDetailsRepository.findByCustomerMailId(customerDao.getUsername(), customerDao.getPassword());

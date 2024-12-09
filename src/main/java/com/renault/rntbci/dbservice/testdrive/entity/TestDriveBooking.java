@@ -3,6 +3,8 @@ package com.renault.rntbci.dbservice.testdrive.entity;
 import com.renault.rntbci.dbservice.customerdetails.entity.CustomerDetails;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class TestDriveBooking {
 
@@ -12,9 +14,18 @@ public class TestDriveBooking {
     @OneToOne
     @JoinColumn(name = "testdrive_id")
     TestDrive testDrive;
+    LocalDateTime dateTime;
     @OneToOne
     @JoinColumn(name="customer_id")
     CustomerDetails details;
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
 
     public long getBooking_id()
     {

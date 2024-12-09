@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class CarServiceService {
+public class CarServiceService implements ICarServiceImpl{
 
     @Autowired
     ICarServiceRepository carServiceRepository;
     @Autowired
     ICustomerRepository customer_details_repository;
+    @Override
     public CarService addServices(CarService service)
     {
        // long ids=service.getDetails().getCustomer_id();
@@ -36,6 +37,7 @@ public class CarServiceService {
         }
         ///
     }
+    @Override
     public List<CarService>getAllDats()
     {
         return carServiceRepository.findAll();

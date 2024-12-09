@@ -13,13 +13,14 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class TestDriveBookingService {
+public class TestDriveBookingService implements ITestDriveBookingImpl{
     @Autowired
     ITestDriveBookingRepository iTestDriveBookingRepository;
     @Autowired
     ITestDriveRepository iTestDriveRepository;
     @Autowired
     ICustomerRepository iCustomerRepository;
+    @Override
     public TestDriveBooking addDatas(TestDriveBooking testDriveBooking)
     {
         Optional<CustomerDetails> details=iCustomerRepository.findById(testDriveBooking.getDetails().getCustomer_id());

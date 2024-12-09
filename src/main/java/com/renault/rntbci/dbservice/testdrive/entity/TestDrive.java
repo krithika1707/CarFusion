@@ -12,7 +12,6 @@ public class TestDrive {
     String car_name;
     @Column(length = 1000)
     String  car_image;
-    LocalDateTime date;
     String  time_slots[];
     String description;
     @ManyToOne
@@ -48,14 +47,6 @@ public class TestDrive {
 
     public void setCar_image(String car_image) {
         this.car_image = car_image;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
     }
 
     public String[] getTime_slots() {

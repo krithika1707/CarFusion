@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TestDriveService {
+public class TestDriveService implements ITestDriveImpl{
     @Autowired
     ITestDriveRepository testDriveRepository;
     @Autowired
     ITestDriveSegmentsRepository iTestDriveSegmentsRepository;
+    @Override
     public TestDrive addDatas(TestDrive testDrive)
     {
         Optional<TestDriveSegments> segments=iTestDriveSegmentsRepository.findById(testDrive.getTestDriveSegments().getSegment_id());
@@ -23,10 +24,12 @@ public class TestDriveService {
         testDrive.setTestDriveSegments(segs);
         return testDriveRepository.save(testDrive);
     }
+    @Override
     public List<TestDrive> getAll()
     {
         return testDriveRepository.findAll();
     }
+    @Override
     public List<TestDrive>getSegments(long drive)
     {
         return testDriveRepository.findBySegments(drive);

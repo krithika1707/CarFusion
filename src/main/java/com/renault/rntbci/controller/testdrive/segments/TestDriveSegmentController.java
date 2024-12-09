@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/testdrive/segments")
 @CrossOrigin("*")
@@ -19,4 +21,10 @@ public class TestDriveSegmentController
     {
         return new ResponseEntity<>(testDriveSegmentsService.addDatas(segments), HttpStatus.ACCEPTED);
     }
+    @GetMapping("/all")
+    public ResponseEntity<List<TestDriveSegments>> getAll()
+    {
+        return new ResponseEntity<>(testDriveSegmentsService.getAllSegments(), HttpStatus.ACCEPTED);
+    }
+
 }
