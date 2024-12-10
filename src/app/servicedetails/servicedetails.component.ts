@@ -29,9 +29,13 @@ timeslots=['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '6:00 PM'];
   minDate: string = this.abc;
   objs:any={};
   arry:any=[];
+
+
   goBack(): void {
     this.router.navigate(['/home']);
   }
+
+  
   onDateChange() {
     if (this.selectedDate) {
 this.service.getAllSlots().subscribe((e:any)=>{
@@ -109,7 +113,7 @@ this.availableTimeSlots=["No Slots Available!!!"];
               this.router.navigate(['/home']);
         
             },error:(error)=>{
-              alert("You Already Booked!!!!!!!")
+              alert("One customer can book only one Service!")
               console.log("min:"+new Date().toISOString().split("T")[0]);
     console.log(this.abc);
               

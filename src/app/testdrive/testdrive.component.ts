@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestdriveserviceService } from '../testdriveservice.service';
 import { Segments } from '../segments';
-
+ 
 @Component({
   selector: 'app-testdrive',
   templateUrl: './testdrive.component.html',
@@ -20,31 +20,37 @@ export class TestdriveComponent implements OnInit {
   flag: any = false;
   selectedSegmentDetails: any = null;
   isLoading!: boolean;
-
+ 
   constructor(
     private router: Router,
     private ch: ChangeDetectorRef,
     private service: TestdriveserviceService
   ) {}
-
+ 
   ngOnInit(): void {
     // Fetch the segment data
     this.service.getSegments().subscribe((e) => {
       this.response = e;
       this.isLoading = false;
       this.ch.detectChanges();
-    });
+ 
+  // onScheduleTestDrive(): void{
+     const sedanSegment  = this.response.find(segment => segment.segment.toLowerCase() === 'sedan');
+    if(sedanSegment){
+      this.selectedSegment = sedanSegment.segment_id;
+       this.onSelectSegment(this.selectedSegment);
+     } 
+   });
   }
-
-  // When a tab is selected, show corresponding data
+ 
   onSelectSegment(segmentId: any): void {
     this.isLoading = true;
     this.selectedSegment = segmentId;
     this.selectedSegmentDetails = this.response.find(
       (segment) => segment.segment_id === segmentId
     );
+ 
     localStorage.setItem('testdrive_id', this.selectedSegmentDetails.segment_id);
-
     this.service.getAllSegments(localStorage.getItem('testdrive_id')).subscribe((e) => {
       this.models = e;
       this.isLoading = false;
@@ -53,12 +59,10 @@ export class TestdriveComponent implements OnInit {
     (error) => {
       console.error('Error loading car models', error);
       this.isLoading = false;
-    }
-  );
+    });
   }
-
-
-
+ 
+ 
   convertTo24HourFormat(time: any) {
     const [timeString, modifier] = time.split(/(AM|PM)/);
     let [hours, minutes] = timeString.split(':');
@@ -70,7 +74,7 @@ export class TestdriveComponent implements OnInit {
     }
     return `${String(hours).padStart(2, '0')}:${minutes}`;
   }
-
+ 
   formatDateTime(date: any) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -80,35 +84,33 @@ export class TestdriveComponent implements OnInit {
     const seconds = String(date.getSeconds()).padStart(2, '0');
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
-
-
-
-
-
+ 
+ 
+ 
   bookTestDrive(car: any): void {
     const carId = car.testdrive_id;
     const selectedDate = this.selectedDates[carId];
     const selectedSlot = this.selectedSlots[carId];
-
+ 
     // Validate if the user has selected both date and time slot
     if (!selectedDate || !selectedSlot) {
       alert("Error: Please select both date and time slot.");
       return;
     }
-
+ 
     const timeSlot24Hour = this.convertTo24HourFormat(selectedSlot);
     const selectedDateTimeString = `${selectedDate} ${timeSlot24Hour}`;
     const selectedDateTime = new Date(selectedDateTimeString);
-
+ 
     if (isNaN(selectedDateTime.getTime())) {
       alert("Error: Invalid Date or Time.");
       return;
     }
-
+ 
     const offsetInMs = 5.5 * 60 * 60 * 1000; // Adjust for time zone (e.g., IST = UTC +5.5 hours)
     const adjustedDateTime = new Date(selectedDateTime.getTime() + offsetInMs);
     const formattedDateTimeISO = adjustedDateTime.toISOString();
-
+ 
     const testdrive_id = car.testdrive_id;
     // Send the formatted ISO 8601 date-time in the request body
     this.service.saveBookings({
@@ -125,7 +127,7 @@ export class TestdriveComponent implements OnInit {
       }
     );
   }
-
+ 
   goBack(): void {
     this.router.navigate(['/home']);
   }

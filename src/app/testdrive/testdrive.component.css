@@ -1,15 +1,37 @@
-/* Tabs Container */
+/* Back Button Hover Effect */
+.back-button:hover {
+  color: #1a6fa0;
+}
+
+/* Select Car Model Heading */
+h1 {
+  margin-top: 60px; /* Provide space for the Back to Home button */
+  color: #333;
+  font-size: 50px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #2c3e50;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Car Segment Filters (Tabs) */
 .tabs {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Distribute space equally between items */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
   background-color: #f1f1f1;
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 30px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-/* Tab styling */
 .tab {
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 18px;
@@ -25,66 +47,19 @@
   color: white;
 }
 
-/* Active Tab */
 .tab.active {
   background-color: #2980b9;
   color: white;
 }
 
-/* Segment Details */
-.segment-details {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
-}
-
-.segment-details h3 {
-  font-size: 32px;
-  color: #2980b9;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.segment-details p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.segment-details ul {
-  list-style-type: disc;
-  margin-left: 20px;
-  font-size: 16px;
-  color: #555;
-}
-
 /* Car Models and Details */
 .car-models-container {
+  margin-top: 20px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
   text-align: center;
-}
-
-h1 {
-  margin-bottom: 30px;
-  color: #333;
-  font-size: 50px;
-  font-weight: 900;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  margin-top: 50px;
-  letter-spacing: 4px;
-  color: #2c3e50;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .car-models-list {
@@ -93,8 +68,10 @@ h1 {
   gap: 20px;
   padding: 0;
   justify-items: center;
+  transition: all 0.3s ease;
 }
 
+/* Car Cards */
 .car-card {
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -104,19 +81,23 @@ h1 {
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for zoom effect */
+  position: relative;
+  will-change: transform; /* Optimizing for animation */
 }
 
 .car-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.15); /* Increased zoom on hover */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+  z-index: 10; /* Bring hovered card to the front */
 }
 
 .car-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth transition for image zoom */
 }
 
 .car-image img {
@@ -193,6 +174,7 @@ h1 {
   background-color: #0056b3;
 }
 
+/* Responsive Design */
 @media (max-width: 1200px) {
   .car-models-list {
     grid-template-columns: repeat(3, minmax(270px, 1fr));
@@ -209,39 +191,4 @@ h1 {
   .car-models-list {
     grid-template-columns: 1fr;
   }
-}
-
-/* Back Button (Only for the back button at the bottom left) */
-.back-button {
-  background-color: #2980b9;
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: fixed; /* Fixed position to stay at the bottom */
-  bottom: 20px;    /* Distance from the bottom */
-  left: 20px;      /* Distance from the left */
-}
-
-.back-button:hover {
-  background-color: #1a6fa0;
-}
-
-/* Ensure other buttons inside the car cards are unaffected */
-button {
-  background-color: #2980b9;
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #1a6fa0;
 }

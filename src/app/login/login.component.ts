@@ -4,13 +4,13 @@ import { LoginServerService } from '../login-server.service';
 import { CustomerDetails } from '../customer-details';
 import { LoginDetails } from '../login-details';
 import { CustomerIdService } from '../customer-id.service';
-
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
+ 
 export class LoginComponent {
   isLogin: boolean = true;  
   user:CustomerDetails = {
@@ -19,12 +19,11 @@ export class LoginComponent {
     customer_mail_id: '',
     customer_mobile_number: '' 
   };
-  
 logins:LoginDetails={
   username:'',
     password: ''
 };
-
+ 
   constructor(private router: Router,private services:LoginServerService,private customer_id:CustomerIdService) {}
   toggleForm() {
     this.isLogin = !this.isLogin;
@@ -33,30 +32,25 @@ logins:LoginDetails={
     this.services.addUsers(this.user);
     if (this.user.customer_name && this.user.password && this.user.customer_mail_id) {
       console.log('Sign Up Form Submitted');
-      
       console.log(this.user); 
-      alert('Sign Up Successful!');
-      this.isLogin=true;
-      //this.router.navigate(['/']);
-     
+      this.isLogin = true;
+     // this.router.navigate(['/']);
     } else {
       alert('Please fill in all fields.');
     }
   }
-
+ 
   onLoginSubmit() {
     if (!this.logins.username || !this.logins.password) {
         return; 
     }
-  
     this.services.checkLogin(this.logins).subscribe({
       next: (response) => {
         this.customer_id.setCustomerId(response.customer_id);
        //const id=this.customer_id.getCustomerId();
         localStorage.setItem("customer_id",response.customer_id);
         console.log(`ans:${response}`);
-        console.log(`ans:${response.customer_id}`);  
-        alert("Welcome!!!!");  
+        console.log(`ans:${response.customer_id}`);   
         this.router.navigate(['/home']);
       },
       error: (err) => {
@@ -64,5 +58,7 @@ logins:LoginDetails={
         alert('Login failed. Please check your credentials.');
       }
     });
+ 
+ 
    }
 }

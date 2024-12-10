@@ -1,5 +1,4 @@
-/* Service component css */
-html, body {
+  html, body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -10,7 +9,7 @@ html, body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-  }
+  } 
    
   .background-container {
     position: relative;
@@ -119,6 +118,7 @@ html, body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: 600;
+    position: absolute;
   }
    
   button:disabled {
@@ -173,7 +173,7 @@ html, body {
     display: block;
     margin: 10px 0 5px;
   }
- /* Marquee Styles */
+
 .marquee {
   width: 100%;
   background-color: #2980b9;
@@ -229,3 +229,7 @@ html, body {
   option:disabled {
     background-color: #f0f0f0;
   }
+
+
+
+
