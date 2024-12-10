@@ -14,7 +14,7 @@
     <h3>{{ car.model }}</h3>
     <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
     <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
-    <p><strong>Owners:</strong> {{ car.owners }}</p>
+    <p><strong>Fuel Type:</strong> {{ car.fuelType }}</p> 
     <p><strong>Segment:</strong> {{ car.segment }}</p>
     <button (click)="removeFromCart(car)">Remove from Bookings</button>
     </div>
