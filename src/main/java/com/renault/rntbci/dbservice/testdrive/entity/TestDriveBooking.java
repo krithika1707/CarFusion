@@ -11,9 +11,10 @@ public class TestDriveBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long booking_id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "testdrive_id")
     TestDrive testDrive;
+    @Column(unique = true)
     LocalDateTime dateTime;
     @OneToOne
     @JoinColumn(name="customer_id")
