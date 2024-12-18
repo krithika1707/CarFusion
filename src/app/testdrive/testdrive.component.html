@@ -44,7 +44,7 @@
  
           <div class="date">
             <strong>Date:</strong>
-            <input type="date" [(ngModel)]="selectedDates[car.testdrive_id]" />
+            <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.testdrive_id]" />
           </div>
  
           <div class="time-slots">

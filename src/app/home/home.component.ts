@@ -8,7 +8,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(private router: Router) {}
+
+  customerName: String | null='';
+
+  constructor(private router: Router) {
+    this.customerName = localStorage.getItem('customer_name');
+  }
 
 
   logout() {

@@ -1,34 +1,69 @@
 
+<!--Signup form-->
 <div class="modal">
-  
-  <form *ngIf="!isLogin" (ngSubmit)="onSignUpSubmit()">
+  <form *ngIf="!isLogin" [formGroup]="signupForm" (ngSubmit)="onSignUpSubmit()">
+    <h2>Sign Up</h2>
+   
     <label for="name">Customer</label>
-    <input type="text" [(ngModel)]="user.customer_name" name="name" required />
+    <input id="name" formControlName="customer_name" type="text" required />
+    <div class="text-danger" *ngIf="signupForm.get('customer_name')?.touched && signupForm.get('customer_name')?.invalid">
+      <small *ngIf="signupForm.get('customer_name')?.errors?.['required']">Name is required</small>
+    </div>
 
+
+ 
     <label for="phone">Phone Number</label>
-    <input type="text" [(ngModel)]="user.customer_mobile_number" name="phone" required pattern="^[0-9]{10}$" />
+    <input id="phone" formControlName="customer_mobile_number" type="text" required pattern="^[0-9]{10}$" />
+    <div class="text-danger" *ngIf="signupForm.get('customer_mobile_number')?.touched && signupForm.get('customer_mobile_number')?.invalid">
+      <small *ngIf="signupForm.get('customer_mobile_number')?.errors?.['required']">Mobile Number is required</small>
+      <small *ngIf="signupForm.get('customer_mobile_number')?.errors?.['pattern']">Enter a valid number</small>
+    </div>
+
+
 
     <label for="email">Email</label>
-    <input type="email" [(ngModel)]="user.customer_mail_id" name="email" required />
+    <input id="email" formControlName="customer_mail_id" type="email" required />
+    <div class="text-danger" *ngIf="signupForm.get('customer_mail_id')?.touched && signupForm.get('customer_mail_id')?.invalid">
+      <small *ngIf="signupForm.get('customer_mail_id')?.errors?.['required']">Email is required</small>
+      <small *ngIf="signupForm.get('customer_mail_id')?.errors?.['email']">Enter a valid email</small>
+    </div>
+
 
     <label for="password">Password</label>
-    <input type="password" [(ngModel)]="user.password" name="password" required />
+    <input id="password" formControlName="password" type="password" required />
+    <div class="text-danger" *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+      <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</small>
+      <small *ngIf="signupForm.get('password')?.errors?.['pattern']">Password must be 5 characters length</small>
+    </div>
 
-    <button type="submit">Sign Up</button>
+
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+ 
+    <button type="button" (click)="toggleForm()">Already have an account? Login</button>
+   
   </form>
+ 
 
-  <form *ngIf="isLogin" (ngSubmit)="onLoginSubmit()">
+  <!--Login form-->
+  <form *ngIf="isLogin" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <h2>Login</h2>
+   
     <label for="name">Customer Id</label>
-    <input type="text" [(ngModel)]="logins.username" name="name" required />
+    <input id="name" formControlName="username" type="text" required />
+    <div class="text-danger" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+      <small *ngIf="loginForm.get('username')?.errors?.['required']">Username is required</small>
+    </div>
+
 
     <label for="password">Password</label>
-    <input type="password" [(ngModel)]="logins.password" name="password" required />
+    <input id="password" formControlName="password" type="password" required />
+    <div class="text-danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+      <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+    </div>
 
-    <button type="submit">Login</button>
-
-  
-  <button (click)="toggleForm()">
-    {{ isLogin ? 'Don\'t have an account? Sign up' : 'Already have an account? Login' }}
-  </button>
-</form>
+ 
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+ 
+    <button type="button" (click)="toggleForm()">Don't have an account? Sign up</button>
+  </form>
 </div>

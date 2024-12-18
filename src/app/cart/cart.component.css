@@ -97,3 +97,26 @@
   .checkout-btn:hover {
     background-color: #2980B9;
   }
+
+  .date,
+.time-slots {
+  margin-bottom: 20px;
+}
+
+.date strong,
+.time-slots strong {
+  font-size: 1.1em;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.date input,
+.time-slots select {
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestdriveserviceService } from '../testdriveservice.service';
-import { Segments } from '../segments';
+
  
 @Component({
   selector: 'app-testdrive',
@@ -12,14 +12,16 @@ export class TestdriveComponent implements OnInit {
   segment_id!: number;
   arr: any[] = [];
   response: any[] = [];
-  selectedSegment: any;  // Holds the selected segment
-  selectedDates: { [carId: string]: string } = {}; // Stores the selected date for each car
-  selectedSlots: { [carId: string]: string } = {}; // Stores the selected time slot for each car
+  selectedSegment: any; 
+  selectedDates: { [carId: string]: string } = {}; 
+  selectedSlots: { [carId: string]: string } = {}; 
   models: any = [];
   testDriveBookingService: any;
   flag: any = false;
   selectedSegmentDetails: any = null;
   isLoading!: boolean;
+
+  mindate:string= new Date().toISOString().split('T')[0];
  
   constructor(
     private router: Router,

@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+.customer-name {
+  margin-left: 80%;
+  top: 30px;
+  color: #2980b9;
+  font-weight: bold;
+}
+
 body {
   font-family: 'Poppins', sans-serif; 
   background-color: #f4f4f9;
@@ -13,14 +20,14 @@ body {
 }
 
 .home {
-  position: relative; /* Position relative to place the logout button in the corner */
+  position: relative; 
   padding: 20px;
 }
 
 .home button {
-  position: absolute; /* Place the button absolutely inside the container */
-  top: 20px; /* Distance from the top */
-  right: 20px; /* Distance from the right */
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
   background-color: #2980b9;
   color: #fff;
   padding: 10px 20px;
@@ -32,7 +39,7 @@ body {
 }
 
 .home button:hover {
-  background-color: #1a6fa0; /* Button color on hover */
+  background-color: #1a6fa0; 
 }
 
 .welcome-section {
@@ -142,6 +149,7 @@ body {
   background-color: #2980b9;
   color: #fff;
   border-color: #1a6fa0;
+  cursor: pointer;
 }
 
 .service-card:hover {
@@ -176,7 +184,7 @@ body {
   color: #fff;
 }
 
-/* Media Query for Mobile Devices */
+
 @media (max-width: 768px) {
   .service-container {
     flex-direction: column;
