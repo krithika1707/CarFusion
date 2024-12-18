@@ -1,0 +1,33 @@
+<!-- <div class="car-models-container">
+  <h1>Select Car Model</h1>
+ 
+  <div class="car-models-list">
+    <div *ngFor="let car of models" class="car-card">
+      
+      <div class="car-image">
+        <img [src]="car.car_image" alt="{{ car.car_name }}">
+      </div>
+ 
+      <div class="car-details">
+        <h2>{{ car.car_name }}</h2>
+        <p>{{ car.description }}</p>
+ 
+        <div class="date">
+          <strong>Date:</strong>
+          <input type="date" [(ngModel)]="selectedDates[car.testdrive_id]" />
+        </div>
+ 
+        <div class="time-slots">
+          <strong>Available Test Drive Slots:</strong>
+          <select [(ngModel)]="selectedSlots[car.testdrive_id]">
+            <option *ngFor="let slot of car.time_slots" [value]="slot">{{ slot }}</option>
+          </select>
+        </div>
+ 
+        <button class="book-btn" [disabled]="!selectedDates[car.testdrive_id] || !selectedSlots[car.testdrive_id]" (click)="bookTestDrive(car)">
+          Book Test Drive
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->

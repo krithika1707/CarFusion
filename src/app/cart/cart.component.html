@@ -1,0 +1,50 @@
+<div class="back-button-container" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
+  <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
+</div>
+
+<div class="cart-container">
+    <h2>Your Bookings</h2>
+     
+      <div *ngIf="cartItems.length === 0" class="empty-cart">
+        No Cars have been Selected.
+      </div>
+     
+    <div class="cart-items">
+      <div *ngFor="let car of cartItems" class="cart-item">
+        <div class="cart-image-container">
+           <img [src]="car.image" alt="{{ car.model }}" class="cart-image">
+        </div>
+        <div class="cart-details">
+          <h3>{{ car.model }}</h3>
+          <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
+          <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
+          <p><strong>Segment:</strong> {{ car.segment }}</p>
+          <div class="date">
+          <strong>Date:</strong>
+            <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.resale_id]" />
+          </div>
+
+          <div class="time-slots">
+            <strong>Available Test Drive Slots:</strong>
+            <select [(ngModel)]="selectedSlots[car.resale_id]">
+              <option>09:00AM</option>
+              <option>03:00PM</option>
+              <option>05:00PM</option>
+            </select>
+          </div>
+
+         <button (click)="removeFromCart(car)">Remove from Bookings</button>
+        </div>
+      </div>
+    </div>
+     
+    <div *ngIf="cartItems.length > 0" class="cart-total">
+      <p><strong>Total:</strong> ₹{{ getTotalPrice() | number:'1.0-0' }}</p>
+      <button (click)="booking(cartItems)" class="checkout-btn" 
+      [disabled]="cartItems.length === 0">
+        Confirm your Bookings
+      </button>
+    </div>
+</div>
+    
+  

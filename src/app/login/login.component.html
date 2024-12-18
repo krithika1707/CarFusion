@@ -1,0 +1,69 @@
+
+<!--Signup form-->
+<div class="modal">
+  <form *ngIf="!isLogin" [formGroup]="signupForm" (ngSubmit)="onSignUpSubmit()">
+    <h2>Sign Up</h2>
+   
+    <label for="name">Customer</label>
+    <input id="name" formControlName="customer_name" type="text" required />
+    <div class="text-danger" *ngIf="signupForm.get('customer_name')?.touched && signupForm.get('customer_name')?.invalid">
+      <small *ngIf="signupForm.get('customer_name')?.errors?.['required']">Name is required</small>
+    </div>
+
+
+ 
+    <label for="phone">Phone Number</label>
+    <input id="phone" formControlName="customer_mobile_number" type="text" required pattern="^[0-9]{10}$" />
+    <div class="text-danger" *ngIf="signupForm.get('customer_mobile_number')?.touched && signupForm.get('customer_mobile_number')?.invalid">
+      <small *ngIf="signupForm.get('customer_mobile_number')?.errors?.['required']">Mobile Number is required</small>
+      <small *ngIf="signupForm.get('customer_mobile_number')?.errors?.['pattern']">Enter a valid number</small>
+    </div>
+
+
+
+    <label for="email">Email</label>
+    <input id="email" formControlName="customer_mail_id" type="email" required />
+    <div class="text-danger" *ngIf="signupForm.get('customer_mail_id')?.touched && signupForm.get('customer_mail_id')?.invalid">
+      <small *ngIf="signupForm.get('customer_mail_id')?.errors?.['required']">Email is required</small>
+      <small *ngIf="signupForm.get('customer_mail_id')?.errors?.['email']">Enter a valid email</small>
+    </div>
+
+
+    <label for="password">Password</label>
+    <input id="password" formControlName="password" type="password" required />
+    <div class="text-danger" *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+      <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</small>
+      <small *ngIf="signupForm.get('password')?.errors?.['pattern']">Password must be 5 characters length</small>
+    </div>
+
+
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+ 
+    <button type="button" (click)="toggleForm()">Already have an account? Login</button>
+   
+  </form>
+ 
+
+  <!--Login form-->
+  <form *ngIf="isLogin" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <h2>Login</h2>
+   
+    <label for="name">Customer Id</label>
+    <input id="name" formControlName="username" type="text" required />
+    <div class="text-danger" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+      <small *ngIf="loginForm.get('username')?.errors?.['required']">Username is required</small>
+    </div>
+
+
+    <label for="password">Password</label>
+    <input id="password" formControlName="password" type="password" required />
+    <div class="text-danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+      <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+    </div>
+
+ 
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+ 
+    <button type="button" (click)="toggleForm()">Don't have an account? Sign up</button>
+  </form>
+</div>
