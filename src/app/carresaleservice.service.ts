@@ -17,13 +17,13 @@ export class CarresaleserviceService {
   }
 
   getCarsByPrice(priceRange: number): Observable<any[]> {
-    const params = new HttpParams().set('PriceRange', priceRange.toString());
-    return this.http.get<any[]>(`${this.baseUrl}/get/price?price=`, { params });
+    
+    return this.http.get<any[]>(`${this.baseUrl}/get/price?price=${priceRange}`);
   }
 
   getCarsBySegment(segmentId: number): Observable<any[]> {
-    const params = new HttpParams().set('segmentId', segmentId.toString());
-    return this.http.get<any[]>(`${this.baseUrl}/get/segments?ids=`, { params });
+    
+    return this.http.get<any[]>(`${this.baseUrl}/get/segments?ids=${segmentId}`);
   }
 
   getCarsByPriceAndSegment(priceRange: number, segmentId: number): Observable<any[]> {

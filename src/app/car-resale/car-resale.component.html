@@ -16,7 +16,7 @@
       max="1500000"
       step="100"
       [(ngModel)]="price"
-      (input)="onPriceChange()"
+      (input)="onPriceChange(price)"
     >
     <span id="priceValue">₹{{ price | number:'1.0-0' }}</span>
   </div>
@@ -28,25 +28,39 @@
       <input type="radio" name="segment" [(ngModel)]="selectedSegment" [value]="segment.name" (change)="onSearch()">
       {{ segment.name }}
      </label>
+    </div>
+  </div>
 </div>
-</div>
-<button (click)="onSearch()">Search</button>
+
+<div *ngIf="filteredCars.length === 0" class="no-cars">
+  No cars to display
 </div>
  
-<div class="car-list">
+ 
+<div class="arrow-button-container" style="position: absolute; top: 50%; left: 10px; z-index: 1; cursor: pointer;">
+  <i class="bi bi-chevron-left" (click)="moveCarList('left')" style="font-size: 2rem; color: #2c3e50;"></i>
+</div>
+
+
+<div class="car-list" #carListContainer>
   <div *ngFor="let car of filteredCars" class="car-item">
     <img [src]="car.image" alt="{{ car.model }}" class="car-image">
     <div class="car-details">
       <h3>{{ car.model }}</h3>
       <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
-      <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
+      <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} approx.</p>
       <p><strong>Fuel Type:</strong> {{ car.fuelType }}</p>
       <p><strong>Segment:</strong> {{ car.segment }}</p>
       <button (click)="addToCart(car)">Book</button>
     </div>
   </div>
 </div>
- 
+
+<div class="arrow-button-container" style="position: absolute; top: 50%; right: 10px; z-index: 1; cursor: pointer;">
+  <i class="bi bi-chevron-right" (click)="moveCarList('right')" style="font-size: 2rem; color: #2c3e50;"></i>
+</div>
+
+
 <div>
   <button routerLink="/cart" class="small-btn">Go to Bookings</button>
 </div>

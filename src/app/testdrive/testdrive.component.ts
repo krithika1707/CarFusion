@@ -94,7 +94,7 @@ export class TestdriveComponent implements OnInit {
     const selectedDate = this.selectedDates[carId];
     const selectedSlot = this.selectedSlots[carId];
  
-    // Validate if the user has selected both date and time slot
+  
     if (!selectedDate || !selectedSlot) {
       alert("Error: Please select both date and time slot.");
       return;
@@ -109,12 +109,13 @@ export class TestdriveComponent implements OnInit {
       return;
     }
  
-    const offsetInMs = 5.5 * 60 * 60 * 1000; // Adjust for time zone (e.g., IST = UTC +5.5 hours)
+    const offsetInMs = 5.5 * 60 * 60 * 1000; 
     const adjustedDateTime = new Date(selectedDateTime.getTime() + offsetInMs);
     const formattedDateTimeISO = adjustedDateTime.toISOString();
  
     const testdrive_id = car.testdrive_id;
-    // Send the formatted ISO 8601 date-time in the request body
+    
+
     this.service.saveBookings({
       testDrive: { testdrive_id: testdrive_id },
       dateTime: formattedDateTimeISO,

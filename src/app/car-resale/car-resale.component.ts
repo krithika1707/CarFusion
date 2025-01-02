@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarresaleserviceService } from '../carresaleservice.service';
 import { CartService } from '../cart/cart.service';
@@ -25,6 +25,8 @@ export class CarResaleComponent implements OnInit {
   selectedSegment: string = '';
   filteredCars: Car[] = [];
   segments: any[] = [];
+
+  @ViewChild('carListContainer') carListContainer!: ElementRef;
 
   constructor(private router: Router, private CarResaleService: CarresaleserviceService, private cartService: CartService) {}
 
@@ -66,7 +68,7 @@ export class CarResaleComponent implements OnInit {
     this.segments = uniqueSegments;
   }
 
-  onPriceChange(): void {
+  onPriceChange(price: number): void {
     this.filterCars();
   }
 
@@ -120,4 +122,12 @@ export class CarResaleComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/home']);
   }
+
+  moveCarList(direction: 'left' | 'right'): void {
+    const container = this.carListContainer.nativeElement;
+    const scrollAmount = direction === 'left' ? -300 : 300; 
+    container.scrollLeft += scrollAmount;
+  }
+
+
 }
