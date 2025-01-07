@@ -1,13 +1,13 @@
 <div class="back-button-container" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
   <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
 </div>
-
+ 
 <div class="cart-container">
     <h2>Your Bookings</h2>
-     
-      <div *ngIf="cartItems.length === 0" class="empty-cart">
+ 
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
         No Cars have been Selected.
-      </div>
+    </div>
      
     <div class="cart-items">
       <div *ngFor="let car of cartItems" class="cart-item">
@@ -16,23 +16,23 @@
         </div>
         <div class="cart-details">
           <h3>{{ car.model }}</h3>
-          <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
-          <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
-          <p><strong>Segment:</strong> {{ car.segment }}</p>
+          <p><strong>Price:</strong>₹{{ car.price | number:'1.0-0' }} </p>
+          <p><strong>Kilometers:</strong>{{ car.km | number:'1.0-0' }} km </p>
+          <p><strong>Segment: </strong>{{ car.segment }}</p>
           <div class="date">
-          <strong>Date:</strong>
-            <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.resale_id]" />
+          <strong>Select a Date:</strong>
+            <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.resale_id]" (change)="onDateChange(car)" />
           </div>
-
-          <div class="time-slots">
-            <strong>Available Test Drive Slots:</strong>
+ 
+          <div class="time-slots" *ngIf="selectedDates[car.resale_id]">
+            <strong>Choose your visiting time:</strong>
             <select [(ngModel)]="selectedSlots[car.resale_id]">
-              <option>09:00AM</option>
-              <option>03:00PM</option>
-              <option>05:00PM</option>
+              <option *ngFor="let slot of car.slots" [value]="slot">
+                {{slot}}
+              </option>
             </select>
           </div>
-
+ 
          <button (click)="removeFromCart(car)">Remove from Bookings</button>
         </div>
       </div>
@@ -40,11 +40,35 @@
      
     <div *ngIf="cartItems.length > 0" class="cart-total">
       <p><strong>Total:</strong> ₹{{ getTotalPrice() | number:'1.0-0' }}</p>
-      <button (click)="booking(cartItems)" class="checkout-btn" 
-      [disabled]="cartItems.length === 0">
+      <button (click)="booking(cartItems)" class="checkout-btn"
+      [disabled]="!canConfirmBooking()" [ngClass]="{'disabled-btn': !canConfirmBooking()}">
         Confirm your Bookings
       </button>
     </div>
 </div>
-    
-  
+ 
+<!-- Modal for Booking Confirmation -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Booking Confirmation</h2>
+    <div class="modal-body">
+      <h3>Booked Cars:</h3>
+      <div class="modal-car-list">
+        <div *ngFor="let car of bookedCars; let i = index" class="modal-car-item">
+          <!-- First Car Image and Details Side-by-Side -->
+          <div class="modal-car-container" [ngClass]="{'first-car': i === 0}">
+            <img [src]="car.image" alt="car image" class="modal-car-image">
+            <div class="modal-car-details">
+              <p>Model: <strong> {{ car.model }}</strong> </p>
+              <p>Price: <strong> ₹{{ car.price | number:'1.0-0' }}</strong> </p>
+              <p>Kilometers: <strong> {{ car.km | number:'1.0-0' }} km</strong> </p>
+              <p>Fuel Type: <strong> {{ car.fuelType }}</strong> </p>
+              <p>Segment: <strong> {{ car.segment }}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>

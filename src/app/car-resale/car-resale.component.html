@@ -1,7 +1,7 @@
 <div class="back-button-container" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
   <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
 </div>
-
+ 
 <div class="heading-container">
   <h1 class="txts">Car Resale</h1>
 </div>
@@ -16,7 +16,7 @@
       max="1500000"
       step="100"
       [(ngModel)]="price"
-      (input)="onPriceChange()"
+      (input)="onPriceChange(price)"
     >
     <span id="priceValue">₹{{ price | number:'1.0-0' }}</span>
   </div>
@@ -24,29 +24,46 @@
   <div class="filter-item">
     <label>Car Segment:</label>
     <div class="radio-buttons">
-     <label *ngFor="let segment of segments">
-      <input type="radio" name="segment" [(ngModel)]="selectedSegment" [value]="segment.name" (change)="onSearch()">
-      {{ segment.name }}
-     </label>
-</div>
-</div>
-<button (click)="onSearch()">Search</button>
+      <label *ngFor="let segment of segments">
+        <input type="radio" name="segment" [(ngModel)]="selectedSegment" [value]="segment.name" (change)="onSearch()">
+        {{ segment.name }}
+      </label>
+    </div>
+  </div>
 </div>
  
-<div class="car-list">
-  <div *ngFor="let car of filteredCars" class="car-item">
-    <img [src]="car.image" alt="{{ car.model }}" class="car-image">
-    <div class="car-details">
-      <h3>{{ car.model }}</h3>
-      <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
-      <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} km</p>
-      <p><strong>Fuel Type:</strong> {{ car.fuelType }}</p>
-      <p><strong>Segment:</strong> {{ car.segment }}</p>
-      <button (click)="addToCart(car)">Book</button>
+<div *ngIf="filteredCars.length === 0" class="no-cars">
+ <h4> No cars to display</h4>
+</div>
+ 
+<div class="car-list-container">
+  <!-- Left Arrow Button -->
+  <div class="arrow-button-container left-arrow">
+    <i class="bi bi-chevron-left" (click)="moveCarList('left')"></i>
+  </div>
+ 
+  <!-- Car List -->
+  <div class="car-list" #carListContainer>
+    <div *ngFor="let car of filteredCars" class="car-item">
+      <img [src]="car.image" alt="{{ car.model }}" class="car-image">
+      <div class="car-details">
+        <h3>{{ car.model }}</h3>
+        <p><strong>Price:</strong> ₹{{ car.price | number:'1.0-0' }}</p>
+        <p><strong>Kilometers:</strong> {{ car.km | number:'1.0-0' }} approx.</p>
+        <p><strong>Fuel Type:</strong> {{ car.fuelType }}</p>
+        <p><strong>Segment:</strong> {{ car.segment }}</p>
+        <button (click)="addToCart(car)">Book</button>
+      </div>
     </div>
+  </div>
+ 
+  <!-- Right Arrow Button -->
+  <div class="arrow-button-container right-arrow">
+    <i class="bi bi-chevron-right" (click)="moveCarList('right')"></i>
   </div>
 </div>
  
 <div>
   <button routerLink="/cart" class="small-btn">Go to Bookings</button>
 </div>
+ 

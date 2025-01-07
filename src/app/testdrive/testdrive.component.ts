@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TestdriveserviceService } from '../testdriveservice.service';
+import { TestdriveserviceService } from './testdriveservice.service';
 
  
 @Component({
@@ -22,7 +22,12 @@ export class TestdriveComponent implements OnInit {
   isLoading!: boolean;
 
   mindate:string= new Date().toISOString().split('T')[0];
+
+  isModalOpen = false;
+  bookings: any[] = [];
+  bookingDetails: any = null;
  
+
   constructor(
     private router: Router,
     private ch: ChangeDetectorRef,
@@ -30,13 +35,11 @@ export class TestdriveComponent implements OnInit {
   ) {}
  
   ngOnInit(): void {
-    // Fetch the segment data
     this.service.getSegments().subscribe((e) => {
       this.response = e;
       this.isLoading = false;
       this.ch.detectChanges();
  
-  // onScheduleTestDrive(): void{
      const sedanSegment  = this.response.find(segment => segment.segment.toLowerCase() === 'sedan');
     if(sedanSegment){
       this.selectedSegment = sedanSegment.segment_id;
@@ -87,6 +90,11 @@ export class TestdriveComponent implements OnInit {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
  
+  onDateChange(car: any): void{
+    if(this.selectedDates[car.testdrive_id]){
+      this.selectedSlots[car.testdrive_id]='';
+    }
+  }
  
  
   bookTestDrive(car: any): void {
@@ -94,7 +102,6 @@ export class TestdriveComponent implements OnInit {
     const selectedDate = this.selectedDates[carId];
     const selectedSlot = this.selectedSlots[carId];
  
-    // Validate if the user has selected both date and time slot
     if (!selectedDate || !selectedSlot) {
       alert("Error: Please select both date and time slot.");
       return;
@@ -109,12 +116,12 @@ export class TestdriveComponent implements OnInit {
       return;
     }
  
-    const offsetInMs = 5.5 * 60 * 60 * 1000; // Adjust for time zone (e.g., IST = UTC +5.5 hours)
+    const offsetInMs = 5.5 * 60 * 60 * 1000;
     const adjustedDateTime = new Date(selectedDateTime.getTime() + offsetInMs);
     const formattedDateTimeISO = adjustedDateTime.toISOString();
  
     const testdrive_id = car.testdrive_id;
-    // Send the formatted ISO 8601 date-time in the request body
+    
     this.service.saveBookings({
       testDrive: { testdrive_id: testdrive_id },
       dateTime: formattedDateTimeISO,
@@ -122,7 +129,18 @@ export class TestdriveComponent implements OnInit {
     }).subscribe(
       (response) => {
         this.flag = true;
+
+        const booking = {
+          car_name: car.car_name,
+          segment: car.segment,
+          date: selectedDate,
+          time: selectedSlot,
+          car_image: car.car_image,
+        };
+        this.bookings.push(booking);
+       
         alert("Your booking has been successfully confirmed!");
+        this.isModalOpen=true;
       },
       (error) => {
         alert("You have already booked a test drive for this car.");
@@ -133,4 +151,17 @@ export class TestdriveComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/home']);
   }
+
+  closeModal() {
+    this.isModalOpen = false; // Close the modal
+  }
+ 
+  selectSlot(slot: string, testdriveId: string): void {
+    if (this.selectedSlots[testdriveId] === slot) {
+      this.selectedSlots[testdriveId] = '';  // Deselect the slot if clicked again
+    } else {
+      this.selectedSlots[testdriveId] = slot;  // Set the selected slot
+    }  }
+ 
+ 
 }
