@@ -1,13 +1,9 @@
-<!-- Back Button -->
+
 <div class="back-button" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
   <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
 </div>
 
 <div>
-
-  
-
-  <!-- Tabs for selecting the segment -->
   <h1>Select Car Model</h1>
   <div class="tabs">
     <div
@@ -19,7 +15,7 @@
     </div>
   </div>
  
-  <!-- Display segment details based on the selected tab -->
+  
   <div *ngIf="selectedSegmentDetails">
     <p>{{ selectedSegmentDetails.description }}</p>
     <ul>
@@ -29,7 +25,7 @@
     </ul>
   </div>
  
-  <!-- Car models and booking -->
+ 
   <div *ngIf="models.length > 0" class="car-models-container">
     
  
@@ -47,7 +43,7 @@
             <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.testdrive_id]" />
           </div>
  
-          <div class="time-slots">
+          <div class="time-slots" *ngIf="selectedDates[car.testdrive_id]">
             <strong>Available Test Drive Slots:</strong>
             <select [(ngModel)]="selectedSlots[car.testdrive_id]">
               <option *ngFor="let slot of car.time_slots" [value]="slot">

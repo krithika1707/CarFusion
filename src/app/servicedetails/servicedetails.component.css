@@ -1,235 +1,290 @@
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  } 
-   
-  .background-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .txts{
-    
-    font-size: 70px;
-    font-weight: 900;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #2c3e50;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  }
-   
-  .second{
-    font-weight: 900;
-    color: #2c3e50;
-  }
-  .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 220%;
-    object-fit: cover;
-    z-index: -1; 
-   
-
-  .form-content {
-    background: rgba(0, 0, 0, 0.8); 
-    padding: 40px;
-    border-radius: 8px;
-    max-width: 500px;
-    position:relative;
-    top:70px;
-    width: 100%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    text-align: center;
-  }
-   
-  h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-   
-  label {
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 8px;
-    display: block;
-    font-weight: 600;
-  }
-  button {
-    background-color: #2980b9;
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover 
-  {
-    background-color: #1a6fa0;
-  }
-  
-  select {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #fff;
-    color: #333;
-    transition: border-color 0.3s ease;
-  }
-   
-  select:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-   
-  button {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1rem;
-    background-color: #007bff;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: 600;
-    position: absolute;
-  }
-   
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-   
-  button:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-   
-  .confirmation-message {
-    background-color: #28a745;
-    padding: 20px;
-    border-radius: 6px;
-    color: white;
-    margin-top: 30px;
-    font-weight: 600;
-    text-align: center;
-  }
-   
-  .form-control {
-    box-sizing: border-box;
-  }
-
-  @media (max-width: 768px) {
-    .form-content {
-      padding: 20px;
-      max-width: 80%;
-    }
-   
-    h2 {
-      font-size: 1.8rem;
-    }
-   
-    button {
-      font-size: 1rem;
-    }
-  }
-
-  }
-  .booking-form {
-    width: 300px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  
-  }
- 
-  label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-
-.marquee {
-  width: 100%;
-  background-color: #2980b9;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-  text-align: center;
-  white-space: nowrap;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  position: relative;
 }
-
-.marquee::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 100%;
+.heading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  position: relative;
+  top: 0;  /* Ensures the heading doesn't move */
+  z-index: 2; /* Keeps it above other content */
+}
+ 
+.background-container {
+  position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.txts{
+ 
+  font-size: 70px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #2c3e50;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+.second{
+  font-weight: 900;
+  color: #2c3e50;
+}
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 220%;
+  object-fit: cover;
+  z-index: -1;
+ 
+ 
+.form-content {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 500px;
+  position:relative;
+  top:70px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+ 
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+ 
+.form-group {
+  margin-bottom: 20px;
+}
+ 
+label {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 600;
+}
+button {
   background-color: #2980b9;
-  animation: marquee-scroll 10s linear infinite;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
-.marquee-text {
-  display: inline-block;
-  padding-right: 100%;
+ 
+button:hover
+{
+  background-color: #1a6fa0;
 }
-
-
-  input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+ 
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+ 
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+ 
+button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  position: absolute;
+}
+ 
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+ 
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+ 
+.confirmation-message {
+  background-color: #28a745;
+  padding: 20px;
+  border-radius: 6px;
+  color: white;
+  margin-top: 30px;
+  font-weight: 600;
+  text-align: center;
+}
+ 
+.form-control {
+  box-sizing: border-box;
+}
+ 
+@media (max-width: 768px) {
+  .form-content {
+    padding: 20px;
+    max-width: 80%;
   }
  
-  button:disabled {
-    background-color: #ccc;
+  h2 {
+    font-size: 1.8rem;
   }
  
   button {
-    background-color: #4574ca;
-    color: white;
-    cursor: pointer;
+    font-size: 1rem;
   }
+}
  
-  button:hover {
-    background-color: #4574ca;
-  }
+}
+.booking-form {
+  width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
  
-  option:disabled {
-    background-color: #f0f0f0;
-  }
-
-
-
-
+}
+ 
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+ 
+.marquee {
+width: 100%;
+background-color: #2980b9;
+color: white;
+font-size: 20px;
+font-weight: bold;
+padding: 10px;
+text-align: center;
+white-space: nowrap;
+overflow: hidden;
+position: relative;
+}
+ 
+.marquee::after {
+content: '';
+position: absolute;
+top: 0;
+left: 100%;
+width: 100%;
+height: 100%;
+background-color: #2980b9;
+animation: marquee-scroll 10s linear infinite;
+}
+ 
+.marquee-text {
+display: inline-block;
+padding-right: 100%;
+}
+ 
+ 
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+ 
+button:disabled {
+  background-color: #ccc;
+}
+ 
+button {
+  background-color: #4574ca;
+  color: white;
+  cursor: pointer;
+}
+ 
+button:hover {
+  background-color: #4574ca;
+}
+ 
+option:disabled {
+  background-color: #f0f0f0;
+}
+ 
+ 
+ 
+.slot-buttons {
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* Creates two equal-width columns */
+gap: 10px; /* Space between buttons */
+max-width: 200px; /* You can set a max-width to control the overall container size */
+margin-top: 20px;
+padding-bottom: 10px; /* Ensure padding is enough to avoid overlap */
+}
+ 
+.time-slots-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Centers the content horizontally */
+  justify-content: center;  /* Centers the content vertically */
+  margin-bottom: 6px; /* Add margin to create space below time slots */
+  padding-bottom: 6px;  /* Padding ensures time slots container is not too close to the button */
+}
+ 
+.book-btn {
+margin-top: 20px; /* Add margin to provide spacing between time slots and button */
+padding-top: 10px;
+}
+ 
+.slot-buttons button {
+padding: 5px 10px;
+border: none;
+background-color: #2980b9;
+color: white;
+cursor: pointer;
+height: 35px;
+width: 95px;
+border-radius: 10px;
+transition: background-color 0.3s ease;
+}
+ 
+.slot-buttons button:hover {
+background-color: #0056b3;
+}
+ 
+.slot-buttons button.selected {
+background-color: #28a745;
+}
+ 
+ 
+ 
+ 

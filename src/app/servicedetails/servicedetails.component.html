@@ -1,44 +1,66 @@
-
 <div style="width: 100%; height: 100vh; justify-content: center; align-items: center; display: flex; flex-direction: column;">
-  
+ 
   <!-- Back Button Container -->
   <div class="back-button-container" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
     <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
   </div>
-
-  <div style="justify-content: center; align-items: center; display: flex; width: 100%; height: 100px; margin-top: 50px;">
+ 
+  <!-- Heading -->
+  <div class="heading-container" style="width: 100%; height: 100px; margin-top: 60px; display: flex; justify-content: center; align-items: center;">
     <h2 class="txts">General Services</h2>
   </div>
-  
-  <div class="booking-form">
-    <!-- Form content goes here -->
-    <div>
-      <label for="appointmentDate">Select Date:</label>
-      <input
-        type="date"
-        id="appointmentDate"
-        [(ngModel)]="selectedDate"
-        (change)="onDateChange()"
-        [min]="minDate"
-      />
+ 
+  <div style="width: 100%; display: flex; justify-content: space-between; padding: 20px; flex-grow: 1;">
+ 
+    <!-- Left Section: Services -->
+    <div style="flex: 1; padding: 20px; background-color: #f1f1f1; border-right: 2px solid #ccc;">
+      <h3>Our Services</h3>
+      <ul>
+        <li>Oil Change</li>
+        <li>Brake Inspection</li>
+        <li>Battery Replacement</li>
+        <li>Tire Rotation</li>
+        <li>Air Filter Replacement</li>
+      </ul>
     </div>
-
-    <div>
-      <label for="timeSlot">Select Time Slot:</label>
-      <select id="timeSlot" [(ngModel)]="selectedTimeSlot">
-        <option value="" disabled>Select Time Slot</option>
-        <option *ngFor="let slot of availableTimeSlots" [value]="slot">
-          {{ slot }}
-        </option>
-      </select>
-    </div>
-
+ 
+ 
+     <!-- Center Section: Booking Form -->
+     <div style="flex: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;">
+      <div class="booking-form">
+        <div>
+          <label for="appointmentDate">Select Date:</label>
+          <input
+            type="date"
+            id="appointmentDate"
+            [(ngModel)]="selectedDate"
+            (change)="onDateChange()"
+            [min]="minDate"
+          />
+        </div>
+ 
+         <!-- Time Slots -->
+         <div *ngIf="availableTimeSlots && availableTimeSlots.length > 0" class="time-slots-container">
+          <h5>Available Slots:</h5>
+          <div class="slot-buttons">
+            <button
+              *ngFor="let slot of availableTimeSlots"
+              [ngClass]="{'selected': selectedTimeSlot === slot}"
+              (click)="selectSlot(slot)"
+              [disabled]="slot === 'No Slots Available!!!'">
+              {{ slot }}
+            </button>
+          </div>
+        </div>
+ 
+        <!--Submit Button-->
     <div>
       <button (click)="onSubmit()" [disabled]="!selectedDate || !selectedTimeSlot">
         Submit
       </button>
     </div>
-
+ 
+    <!-- Confirmation Message -->
     <div *ngIf="submitted">
       <div *ngIf="flag">
         <p>Your appointment has been successfully booked for {{ selectedDate }} at {{ selectedTimeSlot }}.</p>
@@ -46,5 +68,18 @@
     </div>
   </div>
 </div>
-
-
+ 
+<!-- Right Section: Services -->
+<div style="flex: 1; padding: 20px; background-color: #f1f1f1; border-left: 2px solid #ccc;">
+  <h3>Additional Services</h3>
+  <ul>
+    <li>Engine Diagnostics</li>
+    <li>Windshield Repair</li>
+    <li>Suspension Repair</li>
+    <li>Transmission Services</li>
+    <li>Exhaust System Repair</li>
+  </ul>
+</div>
+</div>
+</div>
+ 

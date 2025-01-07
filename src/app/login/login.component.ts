@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ) {}
  
   ngOnInit(): void {
-    // Initialize the signup form with validators
+    // validators
     this.signupForm = new FormGroup({
       customer_name: new FormControl('', Validators.required),
       customer_mobile_number: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
@@ -30,19 +30,19 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.pattern('^.{5,}$')])
     });
  
-    // Initialize the login form with validators
+    
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
   }
  
-  // Toggle between login and signup form
+  
   toggleForm() {
     this.isLogin = !this.isLogin;
   }
  
-  // Sign up form submission handler
+ 
   onSignUpSubmit() {
     if (this.signupForm.valid) {
       const user = this.signupForm.value;
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       console.log('Sign Up Form Submitted');
       console.log(user);
       this.isLogin = true;
-      // this.router.navigate(['/']); // Uncomment if you want to navigate to a different route
+      
     } else {
       alert('Please fill in all fields.');
     }

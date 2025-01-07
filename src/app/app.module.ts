@@ -10,8 +10,7 @@ import { CarResaleComponent } from './car-resale/car-resale.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { TestdriveComponent } from './testdrive/testdrive.component';
-import { TestdrivemodelsComponent } from './testdrivemodels/testdrivemodels.component';
-import { CarmodelsComponent } from './carmodels/carmodels.component';
+
 
 @NgModule({
   declarations: [
@@ -21,9 +20,7 @@ import { CarmodelsComponent } from './carmodels/carmodels.component';
     CarResaleComponent,
     CartComponent,
     LoginComponent,
-    TestdriveComponent,
-    CarmodelsComponent,
-    TestdrivemodelsComponent
+    TestdriveComponent
   ],
   imports: [
     BrowserModule,

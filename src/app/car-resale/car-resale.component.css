@@ -216,3 +216,47 @@ button:hover {
   font-size: 2rem;
   color: #2c3e50;
 }
+
+.no-cars{
+  text-align: center;
+}
+
+.car-list-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+.arrow-button-container {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  background-color: #2980B9;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+ 
+.arrow-button-container i {
+  font-size: 2rem;
+  color: white;
+}
+ 
+.arrow-button-container:hover {
+  background-color: #1c6f99;
+}
+ 
+.arrow-button-container.left-arrow {
+  left: 10px;
+}
+ 
+.arrow-button-container.right-arrow {
+  right: 10px;
+}
