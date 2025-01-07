@@ -10,8 +10,10 @@
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Ensure it appears above other content */
+  padding: 10px; /* Add some padding for better positioning */
 }
-
+ 
+/* Modal Header */
 .modal h2 {
   text-align: center;
   font-size: 2rem;
@@ -19,17 +21,20 @@
   margin-bottom: 20px;
   font-weight: bold;
 }
-
+ 
 /* Form container */
 form {
   background: #fff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
   width: 100%;
   max-width: 400px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-
+ 
 form label {
   display: block;
   margin-bottom: 8px;
@@ -37,7 +42,7 @@ form label {
   font-weight: 600;
   color: #333;
 }
-
+ 
 form input {
   width: 100%;
   padding: 12px;
@@ -46,90 +51,101 @@ form input {
   border-radius: 4px;
   font-size: 1rem;
   background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
 }
-
+ 
 form input:focus {
   border-color: #007bff;
   outline: none;
 }
-
+ 
 /* Submit button */
 form button {
   width: 100%;
   padding: 12px;
-  background-color:  #2980b9;
+  background-color: #2980b9;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 20px; /* Space between button and next element */
 }
-
+ 
 form button:hover {
-  background-color:#1a6fa0;
+  background-color: #1a6fa0;
 }
-
+ 
+form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+ 
 /* Toggle between Login and Signup */
 button[type="button"] {
   background-color: transparent;
   border: none;
-  color:  #2980b9;
+  color: #2980b9;
   font-size: 1rem;
   text-align: center;
   cursor: pointer;
   padding: 10px;
   width: 100%;
+  margin-top: 10px; /* Adds space above the toggle button */
 }
-
+ 
 button[type="button"]:hover {
   color: #1a6fa0;
   text-decoration: underline;
 }
-
+ 
 form .toggle-btn {
   display: block;
   text-align: center;
   margin-top: 10px;
 }
-
+ 
 /* Responsive design */
 @media (max-width: 768px) {
   .modal {
     padding: 15px;
   }
-
+ 
   form {
     padding: 15px;
   }
-
+ 
   h2 {
     font-size: 1.8rem;
   }
-
+ 
   form button {
     padding: 10px;
   }
-
+ 
   button[type="button"] {
     font-size: 0.9rem;
   }
 }
-
-/* login.component.css */
-
-input[type="text"], input[type="password"] {
+ 
+/* Input fields (specific for login and signup) */
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 5px;
+  font-size: 1rem;
 }
-
-input[type="text"]:focus, input[type="password"]:focus {
-  border-color:  #2980b9;
+ 
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #2980b9;
   outline: none;
 }
-
+ 
+/* General button styling */
 button {
   padding: 12px;
   background-color: #2980b9;
@@ -137,14 +153,12 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
+  margin-bottom: 20px;
 }
-
+ 
+/* Disabled button styling */
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
-form button {
-  margin-bottom: 20px; 
-}
-

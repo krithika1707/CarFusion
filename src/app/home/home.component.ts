@@ -8,17 +8,21 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(private router: Router) {}
+
+  customerName: String | null='';
+
+  constructor(private router: Router) {
+    this.customerName = localStorage.getItem('customer_name');
+  }
 
 
   logout() {
     alert('Logged out successfully!');
-    this.router.navigate(['/']);  // Navigate back to Login page
+    this.router.navigate(['/']); 
   }
 
   openService(target: string) {
     console.log('Redirecting to service with target:', target);
-    // Optionally, store the target component in local storage or take other actions
     localStorage.setItem('targetComponent', target);
 
     this.router.navigate(['/servicedetails']);
@@ -26,7 +30,6 @@ export class HomeComponent {
 
   openResale(target: string) {
     console.log('Redirecting to resale with target:', target);
-    // Optionally, store the target component in local storage or take other actions
     localStorage.setItem('targetComponent', target);
 
     this.router.navigate(['/carresale']);
@@ -34,7 +37,6 @@ export class HomeComponent {
 
   openTestDrive(target: string) {
     console.log('Redirecting to resale with target:', target);
-    // Optionally, store the target component in local storage or take other actions
     localStorage.setItem('targetComponent', target);
 
     this.router.navigate(['/testdrive']);

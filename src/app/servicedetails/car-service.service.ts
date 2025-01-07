@@ -18,7 +18,7 @@ export class CarServiceService {
           "customer_id": id
       }
 
-    }
+    } 
   }
   addServicedatas()
   {

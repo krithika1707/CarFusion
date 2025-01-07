@@ -17,8 +17,7 @@ export class CartService {
  
   removeFromCart(car: Car) {
     this.cart = this.cart.filter(c => c !== car);
-  }
- 
+  } 
   clearCart(): void {
     this.cart = [];  
   }

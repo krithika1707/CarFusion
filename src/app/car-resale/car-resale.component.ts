@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, model } from '@angular/core';
+import { Router } from '@angular/router';
+import { CarresaleserviceService } from './carresaleservice.service';
 import { CartService } from '../cart/cart.service';
  
 export interface Car {
+  resale_id: number;
   model: string;
   price: number;
-  km: number;
-  fuelType: String;
+  km: string;
+  fuelType: string;
   segment: string;
   image: string;
+  slots: string[];
+  segmentId: number;
+  selected: any;
 }
  
 @Component({
@@ -16,53 +22,149 @@ export interface Car {
   styleUrls: ['./car-resale.component.css']
 })
 export class CarResaleComponent implements OnInit {
-  price: number = 500000;  
-  selectedSegment: string = '';  
-  cars: Car[] = [
-    { model: 'Renault Clio', price: 1200000, km: 45000, fuelType: 'Diesel', segment: 'Compact', image: 'https://www.renaultgroup.com/wp-content/uploads/2019/01/2019-renault-nouvelle-clio-.jpg' },
-    { model: 'Nissan Altima', price: 1800000, km: 35000, fuelType: 'Diesel', segment: 'Sedan', image: 'https://media.licdn.com/dms/image/C4D12AQEVzSvPyRekBg/article-cover_image-shrink_600_2000/0/1522265636318?e=2147483647&v=beta&t=TDtkZfvBDey0bSC7KuTcKHOb5YLMeTlO9ZXoqljc2K8' },
-    { model: 'Renault Megane', price: 1500000, km: 25000, fuelType: 'CNG', segment: 'Compact', image: 'https://imgd.aeplcdn.com/664x374/n/cw/ec/173325/magnite-facelift-exterior-right-front-three-quarter-2.jpeg?isig=0&q=80' },
-    { model: 'Nissan Rogue', price: 820000, km: 30000,fuelType: 'Petrol', segment: 'SUV', image: 'https://images2.alphacoders.com/736/thumb-1920-736978.jpg' },
-    { model: 'Renault Koleos', price: 950000, km: 40000, fuelType: 'CNG', segment: 'SUV', image: 'https://mahindrafirstchoice.com/images/renault-koleos.jpg' },
-    { model: 'Nissan Leaf', price: 980000, km: 20000, fuelType: 'Electric', segment: 'Electric', image: 'https://cache4.pakwheels.com/system/car_generation_pictures/5857/original/Nissan_Leaf_2018.jpg?1632468474' },
-    { model: 'Renault Talisman', price: 1500000, km: 30000,fuelType: 'Petrol', segment: 'Sedan', image: 'https://ik.imagekit.io/girnar/sayaratbay/large/gallery/color/33/368/renault-talisman-color-719767.jpg' },
-    { model: 'Nissan Juke', price: 1400000, km: 35000, fuelType: 'CNG', segment: 'SUV', image: 'https://imgcdn.oto.com/large/gallery/color/29/226/nissan-juke-color-418780.jpg' },
-    { model: 'Renault Captur', price: 1500000, km: 25000, fuelType: 'Diesel', segment: 'SUV', image: 'https://www.ttcar.com/bases/ttcar_range_cars_image/grande/54/RENAULTCAPTUR.jpg' },
-    { model: 'Nissan Qashqai', price: 7500000, km: 27000, fuelType: 'Petrol', segment: 'SUV', image: 'https://nissan.mu/media/qltaz0vp/16-all-new-nissan-qashqai-colours-1762a8-000000.jpg' },
-    { model: 'Renault Scenic', price: 950000, km: 50000, fuelType: 'CNG', segment: 'MPV', image: 'https://cdn.motor1.com/images/mgl/nBK71/s1/2017-renault-scenic-initiale-paris.jpg' },
-    { model: 'Nissan Micra', price: 7500000, km: 30000, fuelType: 'Petrol', segment: 'Hatchback', image: 'https://imgd.aeplcdn.com/664x374/cw/ec/35639/Nissan-Micra-Active-Exterior-133308.jpg?wm=0&q=80' }
-  ];
- 
+  price: number = 500000;
+  selectedSegment: string = '';
   filteredCars: Car[] = [];
+  segments: any[] = [];
+  filtercardemo: any[] = [];
+  @ViewChild('carListContainer') carListContainer!: ElementRef;
  
-  constructor(private cartService: CartService) {}
+  constructor(private router: Router, private CarResaleService: CarresaleserviceService, private cartService: CartService) { }
  
   ngOnInit(): void {
-    this.onPriceChange();  
+    this.loadCars();
   }
  
-  onPriceChange(): void {
-    this.filteredCars = this.cars.filter(car => car.price <= this.price);
-    this.filterBySegment();
+  carall: any[] = [];
+  // Function to map car data to required format
+  mapCarData(cars: any[]): Car[] {
+    return cars.map(car => ({
+      resale_id: car.resale_id,
+      model: car.car_name,
+      price: car.car_price,
+      km: car.kilometers,
+      fuelType: car.fuel_type,
+      segment: car.segment.segment, // Nested field
+      image: car.car_image,
+      slots: car.slots,
+      segmentId: car.segment.car_segment_id, // Nested field
+      selected: car.selected
+    }));
+  }
+ 
+  loadCars(): void {
+    this.CarResaleService.getAllCars().subscribe((cars) => {
+      console.log("loaded" + cars);
+      cars.forEach(car => {
+        if (car.selected == 0) {
+          this.carall.push(car);
+ 
+        }
+        console.log("loaded " + car.car_name);
+      });
+      console.log(this.carall)
+      this.filteredCars = this.mapCarData(this.carall);  
+      this.extractSegments(cars);
+    }, (error) => {
+      console.error('Error fetching cars......', error);
+    });
+  }
+ 
+  extractSegments(cars: any[]): void {
+    const uniqueSegments = Array.from(
+      new Set(cars.map(car => car.segment.car_segment_id))
+    ).map(id => {
+      const segment = cars.find(car => car.segment.car_segment_id === id);
+      return { id, name: segment ? segment.segment.segment : '' };
+    });
+    this.segments = uniqueSegments;
+  }
+ 
+  onPriceChange(price: number): void {
+    this.filterCars();
   }
  
   onSearch(): void {
-    this.filteredCars = this.cars.filter(car =>
-      car.price <= this.price && (this.selectedSegment ? car.segment.toLowerCase() === this.selectedSegment.toLowerCase() : true)
-    );
+    this.filterCars();
   }
  
-  filterBySegment(): void {
-    if (this.selectedSegment) {
-      this.filteredCars = this.filteredCars.filter(car =>
-        car.segment.toLowerCase() === this.selectedSegment.toLowerCase()
+  filterCars(): void {
+    const segmentId = this.getSegmentIdByName(this.selectedSegment);
+ 
+    if (segmentId && this.price) {
+      this.filtercardemo = [];
+      this.CarResaleService.getCarsByPriceAndSegment(this.price, segmentId).subscribe(
+        (cars) => {
+          cars.forEach((car) => {
+            if (car.selected == 0) {
+              this.filtercardemo.push(car);
+            }
+          })
+          this.filteredCars = this.mapCarData(this.filtercardemo);
+        },
+        (error) => {
+          console.error('Error fetching cars....', error);
+        }
+      );
+    }  
+    else if (segmentId) {
+      this.filtercardemo = [];
+      this.CarResaleService.getCarsBySegment(segmentId).subscribe(
+        (cars) => {
+          cars.forEach((car) => {
+            if (car.selected == 0) {
+              this.filtercardemo.push(car);
+            }
+          })
+          console.log(cars);
+          this.filteredCars = this.mapCarData(this.filtercardemo);
+        },
+        (error) => {
+          console.error('Error fetching cars using segmentId....', error);
+        }
       );
     }
+    else {
+      this.filtercardemo = [];
+      this.CarResaleService.getCarsByPrice(this.price).subscribe(
+        (cars) => {
+          cars.forEach((car) => {
+            if (car.selected == 0) {
+              this.filtercardemo.push(car);
+            }
+          })
+          console.log(cars);
+ 
+          //  this.filteredCars = this.mapCarData(cars);  // Use mapCarData function here
+          this.filteredCars = this.mapCarData(this.filtercardemo);
+        },
+        (error) => {
+          console.error('Error fetching cars using price....', error);
+        }
+      );
+    }
+  }
+ 
+  getSegmentIdByName(segmentName: string): number {
+    const segment = this.segments.find(s => s.name.toLowerCase() === segmentName.toLowerCase());
+    return segment ? segment.id : 0;
   }
  
   addToCart(car: Car): void {
     this.cartService.addToCart(car);
     this.filteredCars = this.filteredCars.filter(c => c !== car);
   }
+ 
+  goBack(): void {
+    this.router.navigate(['/home']);
+  }
+ 
+  moveCarList(direction: 'left' | 'right'): void {
+    const container = this.carListContainer.nativeElement;
+    const scrollAmount = direction === 'left' ? -300 : 300;
+    container.scrollLeft += scrollAmount;
+  }
+ 
+ 
 }
  

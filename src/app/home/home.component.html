@@ -2,6 +2,8 @@
 
 <div class="home">
   
+  <span *ngIf="customerName" class="customer-name">Welcome, {{customerName}}</span>
+
   <!-- Add a Logout Button -->
   <button (click)="logout()">Logout</button>
 </div>
