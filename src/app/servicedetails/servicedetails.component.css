@@ -10,6 +10,44 @@ html, body {
   align-items: center;
   overflow: hidden;
 }
+ 
+ 
+.back-1
+{
+  font-size: 2rem; color: #2c3e50;
+}
+.bi bi-chevron-double-left
+{
+  font-size: 4rem; color: #2c3e50;
+ 
+ 
+}
+.service-head
+{
+  width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; position: relative;
+}
+ 
+ 
+.servicess
+{
+  width: 100%; display: flex; justify-content: space-between; padding: 20px; flex-grow: 1;
+}
+.service1
+{
+  flex: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+}
+ 
+ 
+.service2
+{
+ 
+  flex: 1; padding: 20px; background-color: #f1f1f1; border-left: 2px solid #ccc;
+}
+ 
+.service3
+{
+  flex: 1; padding: 20px; background-color: #f1f1f1; border-right: 2px solid #ccc;
+}
 .heading-container {
   display: flex;
   justify-content: center;
@@ -18,7 +56,13 @@ html, body {
   height: 100px;
   position: relative;
   top: 0;  /* Ensures the heading doesn't move */
-  z-index: 2; /* Keeps it above other content */
+  z-index: 2;
+ margin-top: 60px;
+ 
+ 
+ 
+ 
+  /* Keeps it above other content */
 }
  
 .background-container {
@@ -259,6 +303,11 @@ padding-bottom: 10px; /* Ensure padding is enough to avoid overlap */
   margin-bottom: 6px; /* Add margin to create space below time slots */
   padding-bottom: 6px;  /* Padding ensures time slots container is not too close to the button */
 }
+.time-slots-container h5 {
+  align-self: flex-start;  /* Aligns the heading to the left */
+  margin-left: 10px;  /* Adds a little space from the left edge */
+}
+ 
  
 .book-btn {
 margin-top: 20px; /* Add margin to provide spacing between time slots and button */
@@ -286,9 +335,43 @@ background-color: #28a745;
 }
  
  
+.history-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
  
+.history-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+}
  
-
-
-
+.history-modal button {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+ 
+.history-modal button:hover {
+  background-color: #34495e;
+}
+ 
+.back-button-container
+{
+  position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;
+}
+ 
  
