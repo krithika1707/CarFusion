@@ -1,4 +1,5 @@
 package com.renault.rntbci.dbservice.carservice.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.renault.rntbci.dbservice.customerdetails.entity.CustomerDetails;
 import jakarta.persistence.*;
 
@@ -7,11 +8,12 @@ import java.time.LocalDateTime;
 @Entity
 public class CarService {
     @Id
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long car_service_id;
     LocalDateTime dateTime;
     @OneToOne
     @JoinColumn(name = "customer_id")
+
     CustomerDetails details;
 
     public long getCar_service_id() {

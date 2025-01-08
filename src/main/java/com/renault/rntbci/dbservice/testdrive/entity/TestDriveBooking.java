@@ -1,5 +1,6 @@
 package com.renault.rntbci.dbservice.testdrive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.renault.rntbci.dbservice.customerdetails.entity.CustomerDetails;
 import jakarta.persistence.*;
 

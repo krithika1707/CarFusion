@@ -9,6 +9,8 @@ import com.renault.rntbci.dbservice.customerdetails.repository.ICustomerReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,5 +37,48 @@ public class CarResaleBookingService implements ICarResaleBookingImpl
         }
     }
 
+
+    public String changeDatas(List<Long> resales)
+    {
+        if(resales.size()==0)
+        {
+            return "none";
+        }
+        for(Long car:resales)
+        {
+            Optional<CarResale> carResaleOpt = iCarResaleRepository.findById(car);
+            if (carResaleOpt.isPresent()) {
+                CarResale carResale = carResaleOpt.get();
+                carResale.setSelected("1");
+                System.out.println("CarResale: " + carResale.getCar_name());
+                iCarResaleRepository.save(carResale);
+            } else {
+                System.out.println("CarResale with ID " + car + " not found.");
+                return "none";
+            }
+            //car.setSelected(String.valueOf(1));
+            // iCarResaleRepository.save(car);
+        }
+        return "Changed!!!!!";
+    }
+
+    public List<CarResaleBookings> getBookings() {
+        return iCarResaleBooking.findAll();
+    }
+
+    public List<CarResaleBookings> getCarResaleBookings(long id) {
+        List<CarResaleBookings> list = new ArrayList<>();
+        for (CarResaleBookings carResaleBookings : getBookings()) {
+            if (carResaleBookings.getDetails().getCustomer_id()==id) {
+                list.add(carResaleBookings);
+            }
+        }
+        if(list.isEmpty()){
+            throw new RuntimeException("Id not found");
+        }
+        else{
+            return list;
+        }
+    }
 
 }

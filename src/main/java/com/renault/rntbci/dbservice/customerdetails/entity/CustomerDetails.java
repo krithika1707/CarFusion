@@ -18,7 +18,7 @@ public class CustomerDetails {
     @Column(unique = true)
     private String customer_mail_id;
 
-    @Column(unique = true)
+    @Column
     private String password;
 
  String getCustomer_mail_id() {

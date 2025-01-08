@@ -2,9 +2,9 @@ spring:
   application:
     name: CarFusion
   datasource:
-    url: jdbc:postgresql://localhost:5432/CarFusion
+    url: jdbc:postgresql://localhost:5432/CarFusion1
     username: postgres
-    password: ViratKohli18
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

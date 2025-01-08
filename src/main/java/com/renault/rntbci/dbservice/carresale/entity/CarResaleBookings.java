@@ -1,5 +1,6 @@
 package com.renault.rntbci.dbservice.carresale.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.renault.rntbci.dbservice.customerdetails.entity.CustomerDetails;
 import jakarta.persistence.*;
 
@@ -13,6 +14,7 @@ public class CarResaleBookings
     long car_booking_id;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
+
     CustomerDetails details;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "resale_id")

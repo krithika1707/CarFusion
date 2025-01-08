@@ -42,4 +42,18 @@ public class CarServiceService implements ICarServiceImpl{
     {
         return carServiceRepository.findAll();
     }
+
+    public CarService getServiceBookings(long id)
+    {
+        Optional<CarService> his=carServiceRepository.findByCustomerId(id);
+        if(his.isPresent()){
+            System.out.println("hii");
+            return his.get();
+        }
+        else{
+            throw new RuntimeException("This Customer does not have any history");
+        }
+
+    }
+
 }

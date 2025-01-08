@@ -34,4 +34,10 @@ public class CarServiceController
         return new ResponseEntity<>(service.getAllDats(),HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/bookinghistory")
+    public ResponseEntity<CarService> getCarServiceBookings(@RequestParam long id)
+    {
+        System.out.println(id);
+        return new ResponseEntity<>(service.getServiceBookings(id),HttpStatus.ACCEPTED);
+    }
 }

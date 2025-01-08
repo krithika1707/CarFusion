@@ -14,6 +14,7 @@ public class CarResale {
     String fuel_type;
     String kilometers;
     String slots[];
+    String selected;
 
     public String[] getSlots() {
         return slots;
@@ -93,5 +94,13 @@ CarResaleSegment segment;
     public void setKilometers(String kilometers)
     {
         this.kilometers = kilometers;
+    }
+
+    public String getSelected() {
+        return selected;
+    }
+
+    public void setSelected(String selected) {
+        this.selected = selected;
     }
 }

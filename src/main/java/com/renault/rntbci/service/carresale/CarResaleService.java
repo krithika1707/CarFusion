@@ -48,4 +48,5 @@ public class CarResaleService implements ICarResaleImpl
     public List<CarResale> searchByPrice_Segment(long price, long id) {
         return carResaleRepository.searchByPrices_Segments(price, id);
     }
+
 }
