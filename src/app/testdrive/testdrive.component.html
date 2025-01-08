@@ -88,6 +88,18 @@
             <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.testdrive_id]" />
           </div>
  
+          <div *ngIf="selectedDates[car.testdrive_id]" class="time-slots-container">
+            <h5>Available Slots:</h5>
+            <div class="slot-buttons">
+              <button
+                *ngFor="let slot of car.time_slots"
+                [ngClass]="{'selected': selectedSlots[car.testdrive_id] === slot}"
+                (click)="selectSlot(slot, car.testdrive_id)">
+                {{ slot }}
+              </button>
+            </div>
+          </div>
+<!--           
           <div class="time-slots" *ngIf="selectedDates[car.testdrive_id]">
             <strong>Available Test Drive Slots:</strong>
             <select [(ngModel)]="selectedSlots[car.testdrive_id]">
@@ -95,7 +107,7 @@
                 {{ slot }}
               </option>
             </select>
-          </div>
+          </div> -->
  
           <button
             class="book-btn"

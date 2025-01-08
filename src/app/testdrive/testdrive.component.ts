@@ -182,5 +182,12 @@ export class TestdriveComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/home']);
   }
+
+  selectSlot(slot: string, testdriveId: string): void {
+    if (this.selectedSlots[testdriveId] === slot) {
+      this.selectedSlots[testdriveId] = '';  // Deselect the slot if clicked again
+    } else {
+      this.selectedSlots[testdriveId] = slot;  // Set the selected slot
+    }  }
  
 }
