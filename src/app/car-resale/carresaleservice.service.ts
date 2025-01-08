@@ -9,6 +9,7 @@ export class CarresaleserviceService {
 
   private baseUrl = 'http://localhost:8080/car_resale';
   private bookingUrl = 'http://localhost:8080/carresale/booking/add'
+  private historyUrl='http://localhost:8080/carresale/booking/bookings';
 
   constructor(private http: HttpClient) { }
 
@@ -34,4 +35,8 @@ export class CarresaleserviceService {
     return this.http.post(`${this.bookingUrl}`, obj);
   }
 
+getBookingHistory(customer_id: string){
+    return this.http.get<any[]>(`${this.historyUrl}/${customer_id}`);
+  }
+  
 }

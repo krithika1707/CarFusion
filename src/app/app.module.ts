@@ -10,6 +10,8 @@ import { CarResaleComponent } from './car-resale/car-resale.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { TestdriveComponent } from './testdrive/testdrive.component';
+import { ExtractDateTimePipe } from './extract-date-time.pipe';
+import { ReverseDatePipe } from './reverse-date.pipe';
 
 @NgModule({
   declarations: [ 
@@ -20,6 +22,8 @@ import { TestdriveComponent } from './testdrive/testdrive.component';
     CartComponent,
     LoginComponent,
     TestdriveComponent,
+    ExtractDateTimePipe,
+    ReverseDatePipe,
   ],
   imports: [
     BrowserModule,

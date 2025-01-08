@@ -1,8 +1,50 @@
-
 <div class="back-button" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
   <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
 </div>
+ 
+ 
+<!-- <i class="bi bi-clock-history" (click)="history()"></i> -->
 
+<div class="user-history-container">
+  <i class="bi bi-clock-history" (click)="history()"></i>
+</div>
+
+ 
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h2>TestDrive Confirmation</h2>
+    <div class="modal-body">
+      <h3>Booked Car:</h3>
+
+      <div class="modal-car-list">
+        <div *ngIf="Isbook; else noHistoryTemplate">
+        <div *ngFor="let car of carHistory; let i = index" class="modal-car-item">
+          <!-- First Car Image and Details Side-by-Side -->
+          <div class="modal-car-container" [ngClass]="{'first-car': i === 0}">
+            <img [src]="car.image" alt="car image" class="modal-car-image">
+            <div class="modal-car-details">
+              <p>Model: <strong> {{ car.model }}</strong> </p>
+              <p>Segment: <strong> {{ car.segment }}</strong></p>
+              <p>Date: <strong> {{ car.dateTime | extractDateTime:0:10 | reverseDate}}</strong></p>
+              <p>Time: <strong> {{ car.dateTime | extractDateTime:11:19}}</strong></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noHistoryTemplate>
+        <h5>You haven't booked any service yet</h5>
+      </ng-template>
+
+      </div>
+    </div>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>
+ 
+ 
+ 
 <div>
   <h1>Select Car Model</h1>
   <div class="tabs">
@@ -15,6 +57,10 @@
     </div>
   </div>
  
+ 
+ 
+ 
+ 
   <div *ngIf="selectedSegmentDetails">
     <p>{{ selectedSegmentDetails.description }}</p>
     <ul>
@@ -24,7 +70,10 @@
     </ul>
   </div>
  
+ 
   <div *ngIf="models.length > 0" class="car-models-container">
+   
+ 
     <div class="car-models-list">
       <div *ngFor="let car of models" class="car-card">
         <div class="car-image">
@@ -35,11 +84,11 @@
           <h2>{{ car.car_name }}</h2>
  
           <div class="date">
-            <strong>Select the Date:</strong>
+            <strong>Date:</strong>
             <input type="date" [min]="mindate" [(ngModel)]="selectedDates[car.testdrive_id]" />
           </div>
  
-          <!-- <div *ngIf="selectedDates[car.testdrive_id]" class="time-slots">
+          <div class="time-slots" *ngIf="selectedDates[car.testdrive_id]">
             <strong>Available Test Drive Slots:</strong>
             <select [(ngModel)]="selectedSlots[car.testdrive_id]">
               <option *ngFor="let slot of car.time_slots" [value]="slot">
@@ -47,21 +96,7 @@
               </option>
             </select>
           </div>
-  -->
-
-
-  <div *ngIf="selectedDates[car.testdrive_id]" class="time-slots-container">
-    <h5>Available Slots:</h5>
-    <div class="slot-buttons">
-      <button
-        *ngFor="let slot of car.time_slots"
-        [ngClass]="{'selected': selectedSlots[car.testdrive_id] === slot}"
-        (click)="selectSlot(slot, car.testdrive_id)">
-        {{ slot }}
-      </button>
-    </div>
-  </div>
-
+ 
           <button
             class="book-btn"
             [disabled]="!selectedDates[car.testdrive_id] || !selectedSlots[car.testdrive_id]"
@@ -73,30 +108,7 @@
       </div>
     </div>
   </div>
+ 
+ 
 </div>
-
-<div *ngIf="isModalOpen" class="modal-overlay">
-  <div class="modal-content">
-    <h2>Booking Confirmation</h2>
-    <div class="modal-body">
-      <h3>Booked Cars:</h3>
-      <div class="modal-car-list">
-        <div *ngFor="let booking of bookings" class="modal-car-item">
-          <div class="modal-car-container">
-            <img [src]="booking.car_image" alt="car image" class="modal-car-image">
-            <div class="modal-car-details">
-              <p>Model: <strong>{{ booking.car_name }}</strong></p>
-              <p>Segment: <strong>{{ booking.segment }}</strong></p>
-              <p>Date: <strong>{{ booking.date | date }}</strong></p>
-              <p>Time: <strong>{{ booking.time }}</strong></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button (click)="closeModal()">Close</button>
-  </div>
-</div>
-
-
  

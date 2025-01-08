@@ -15,9 +15,14 @@ export class TestdriveserviceService
   getSegmentId(): number | null {
     return this.segment_id;
   }
+  
   url:string="http://localhost:8080/testdrive/search?"
   url_segment:string="http://localhost:8080/testdrive/segments/all";
-  url_bookings:string="http://localhost:8080/testdrive/booking/book"
+  url_bookings:string="http://localhost:8080/testdrive/booking/book";
+
+   url_booking_history:string="http://localhost:8080/testdrive/booking/bookings";
+
+
   constructor(private access:HttpClient) { }
 getAllSegments(id:any)
 {
@@ -30,7 +35,13 @@ getSegments()
 
 saveBookings(obj:any)
 {
+  console.log(`customer id `+obj.details.customer_id);
   return this.access.post(this.url_bookings,obj);
 }
+
+getBookingHistory(customer_id: string){
+  return this.access.get(`${this.url_booking_history}/${customer_id}`);
+}
+
 }
 

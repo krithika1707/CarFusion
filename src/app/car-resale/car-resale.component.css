@@ -212,3 +212,85 @@ button:hover {
   text-align: center;
 }
  
+
+/* User History Icon - Positioned top-right */
+.user-history-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  cursor: pointer;
+}
+ 
+.user-history-container i {
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+ 
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+ 
+.modal-body {
+  max-height: 400px;
+  overflow-y: auto;
+}
+ 
+.modal-car-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+}
+ 
+.modal-car-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+ 
+.modal-car-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+ 
+.modal-car-image {
+  width: 100px;
+  height: 75px;
+  object-fit: cover;
+}
+ 
+.modal-car-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+ 
+.first-car .modal-car-image {
+  width: 120px;  
+  height: 90px;
+}

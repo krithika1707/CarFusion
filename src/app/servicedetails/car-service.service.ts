@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +34,9 @@ return this.access.get(this.slot_url);
   console.log("ids:"+id);
 return this.access.put<any>(`${this.slot_url}/${id}`,obj);
  }
+
+ getHistory():Observable<any> {
+  return this.access.get<any>(`http://localhost:8080/car_services/bookinghistory?id=${localStorage.getItem("customer_id")}`);
+}
+
 }

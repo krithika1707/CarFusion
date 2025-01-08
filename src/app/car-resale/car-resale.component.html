@@ -1,11 +1,51 @@
 <div class="back-button-container" style="position: absolute; top: 20px; left: 20px; z-index: 1; cursor: pointer;">
   <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
 </div>
- 
+
+<div class="user-history-container">
+  <i class="bi bi-clock-history" (click)="history()"></i>
+</div>
+
 <div class="heading-container">
   <h1 class="txts">Car Resale</h1>
 </div>
  
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Booking Confirmation</h2>
+    <div class="modal-body">
+      <h3>Booked Cars:</h3>
+      <div class="modal-car-list">
+        <div *ngIf="IsBook else BookingHistory">
+          <div *ngFor="let car of carHistory; let i = index" class="modal-car-item">
+            <!-- First Car Image and Details Side-by-Side -->
+            <div class="modal-car-container" [ngClass]="{'first-car': i === 0}">
+              <img [src]="car.image" alt="car image" class="modal-car-image">
+              <div class="modal-car-details">
+                <p>Model: <strong> {{ car.model }}</strong> </p>
+                <p>Price: <strong> ₹{{ car.price | number:'1.0-0' }}</strong> </p>
+                <p>Kilometers: <strong> {{ car.km | number:'1.0-0' }} km</strong> </p>
+                <p>Fuel Type: <strong> {{ car.fuelType }}</strong> </p>
+                <p>Segment: <strong> {{ car.segment }}</strong></p>
+                <p>Date: <strong> {{ car.dateTime | extractDateTime:0:10 | reverseDate}}</strong></p>
+                <p>Time: <strong> {{ car.dateTime | extractDateTime:11:19}}</strong></p>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <ng-template #BookingHistory>
+          <h5>
+              No histories found
+        </h5></ng-template>
+       
+      </div>
+    </div>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>
+
 <div class="filter-container">
   <div class="filter-item">
     <label for="priceRange">Price Range:</label>

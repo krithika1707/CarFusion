@@ -11,11 +11,20 @@ import { Router } from '@angular/router';
 
 export class ServicedetailsComponent {
 
+  flag:boolean=false;
+  IsBook:boolean=true;
+  isModalOpen:boolean=false;
+  carHistory:any={
+    'date':'',
+    'time':''
+  };
+  getHistoryDate:any={};
+ 
+
   constructor(private service: CarServiceService, private customer_id: CustomerIdService, private router: Router) {
 
   }
   timeslots = ['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '6:00 PM'];
-  flag: boolean = false;
   id: any;
   days: any;
   selectedDate: string | null = null;
@@ -85,7 +94,7 @@ export class ServicedetailsComponent {
         console.log(adjustedDateTime)
         console.log("timeslot:" + this.selectedTimeSlot.split(" ")[0])
         const timesl = this.selectedTimeSlot.split(" ")[0];
-        this.service.addServices(adjustedDateTime, this.customer_id.getCustomerId());
+        this.service.addServices(adjustedDateTime, localStorage.getItem("customer_id"));
         this.service.addServicedatas().subscribe(
           {
             next: (ne) => {
@@ -130,4 +139,55 @@ export class ServicedetailsComponent {
       }
     }
   }
+
+ 
+ 
+  goTohistory(){
+   
+   
+      this.isModalOpen=true;
+      console.log(localStorage.getItem("customer_id"))
+      this.service.getHistory().subscribe(
+        (response:any)=>{
+           this.getHistoryDate=response;
+           const dateTime=this.getHistoryDate.dateTime;
+           const dateObj = new Date(dateTime);
+   
+  // Extract the date part (yyyy-mm-dd)
+  const year = dateObj.getFullYear();
+  const month = dateObj.getMonth() + 1; // months are 0-based
+  const day = dateObj.getDate();
+   
+  // Format the date as "yyyy-mm-dd"
+  const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+   
+  // Extract the time part and convert to AM/PM format
+  let hours = dateObj.getHours();
+  let minutes = dateObj.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+   
+  // Convert to 12-hour format
+  hours = hours % 12;
+  hours = hours ? hours : 12; // handle midnight (0) and noon (12)
+  minutes = minutes < 10 ? Number('0' + minutes) : minutes;
+   
+   
+  // Format the time as "hh:mm AM/PM"
+  const formattedTime = `${hours}:${minutes} ${ampm}`;
+  this.carHistory.date=formattedDate;
+  this.carHistory.time=formattedTime;
+  this.IsBook=true;
+   
+   
+        },
+        (error:any)=>{
+          this.IsBook=false;
+           console.log("Error while retriving service history");
+        }
+      )
+    }
+    closeModal(){
+  this.isModalOpen=false;
+    }
+  
 }

@@ -15,6 +15,21 @@ export interface Car {
   segmentId: number;
   selected: any;
 }
+
+export interface CarBookingDetail {
+  car_booking_id: number;
+  resale_id: number;
+  model: string;
+  price: number;
+  km: string;
+  fuelType: string;
+  segment: string;
+  image: string;
+  slots: string[];
+  segmentId: number;
+  selected: any;
+  dateTime: any;
+}
  
 @Component({
   selector: 'app-car-resale',
@@ -25,8 +40,15 @@ export class CarResaleComponent implements OnInit {
   price: number = 500000;
   selectedSegment: string = '';
   filteredCars: Car[] = [];
+  carHistory: CarBookingDetail[]=[];
   segments: any[] = [];
   filtercardemo: any[] = [];
+  carHis: any[]=[];
+  isModalOpen=false;
+  customer_id:any=localStorage.getItem('customer_id');
+  IsBook: boolean= true;
+
+
   @ViewChild('carListContainer') carListContainer!: ElementRef;
  
   constructor(private router: Router, private CarResaleService: CarresaleserviceService, private cartService: CartService) { }
@@ -52,17 +74,37 @@ export class CarResaleComponent implements OnInit {
     }));
   }
  
+  mapBookingData(cars: any[]): CarBookingDetail[]{
+    return cars.map(car => ({
+      car_booking_id: car.car_booking_id,
+      resale_id: car.resale.resale_id,
+      model: car.resale.car_name,
+      price: car.resale.car_price,
+      km: car.resale.kilometers,
+      fuelType: car.resale.fuel_type,
+      segment: car.resale.segment.segment, // Nested field
+      image: car.resale.car_image,
+      slots: car.resale.slots,
+      segmentId: car.resale.segment.car_segment_id, // Nested field
+      selected: car.selected,
+      date:car.date,
+      time:car.time,
+
+      dateTime: car.dateTime
+    }));
+  }
+
   loadCars(): void {
     this.CarResaleService.getAllCars().subscribe((cars) => {
-      console.log("loaded" + cars);
+    
       cars.forEach(car => {
         if (car.selected == 0) {
           this.carall.push(car);
  
         }
-        console.log("loaded " + car.car_name);
+      
       });
-      console.log(this.carall)
+      
       this.filteredCars = this.mapCarData(this.carall);  
       this.extractSegments(cars);
     }, (error) => {
@@ -165,6 +207,50 @@ export class CarResaleComponent implements OnInit {
     container.scrollLeft += scrollAmount;
   }
  
+  history(){
+    this.carHis = [];
+    this.isModalOpen=true;
+    this.CarResaleService.getBookingHistory(this.customer_id).subscribe(
+      (cars)=>{
+        this.IsBook = true;
+        if(cars.length!=null){
+          cars.forEach((car)=>{
+
+          
+
+
+            console.log(car);
+            this.carHis.push(car);
+
+
+
+          
+          })
+
+
+
+          
+
+
+          console.log("carhistory")
+          console.log(this.carHis);
+          this.carHistory=this.mapBookingData(this.carHis);
+        }
+        else{
+          this.IsBook = false;
+        }
+       
+      },
+      (error) =>{
+        this.IsBook = false;
+        console.error('error in showing history...', error);
+      }
+    )
+  }
+  closeModal(){
+    this.isModalOpen=false;
+   }
+   
  
 }
  

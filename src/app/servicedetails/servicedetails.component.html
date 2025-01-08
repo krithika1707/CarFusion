@@ -4,18 +4,38 @@
     <i class="bi bi-chevron-double-left" (click)="goBack()" style="font-size: 2rem; color: #2c3e50;"></i>
   </div>
  
- 
- 
-  <!-- User History Icon -->
-  <!-- <div class="user-history-container">
-    <i class="bi bi-clock-history" (click)="goToHistory()"></i>
-  </div> -->
+  <div class="user-history-container">
+    <i class="bi bi-clock-history" (click)="goTohistory()"></i>
+  </div>
  
  
   <div class="heading-container" >
     <h2 class="txts">General Services</h2>
   </div>
  
+  <div *ngIf="isModalOpen" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Service Booking History</h2>
+      <div class="modal-body">
+        <h3>Booked Cars:</h3>
+        <div class="modal-car-list">
+         <div *ngIf="IsBook; else noHistoryTemplate">
+            <b>You have already booked a service</b>
+            <p>Booked Date: {{carHistory.date}}</p>
+            <p>Booked Time: {{carHistory.time}}</p>
+          </div>
+   
+          <ng-template #noHistoryTemplate>
+            <h5>You haven't booked any service yet</h5>
+          </ng-template>
+   
+          </div>
+       
+      </div>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+  
   <div class="servicess">
    
     <div  class="service3">

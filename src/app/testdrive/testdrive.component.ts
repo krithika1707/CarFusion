@@ -1,33 +1,43 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestdriveserviceService } from './testdriveservice.service';
-
+ 
+ 
+export interface TestdriveBooking{
+  image:any;
+  model:string;
+  segment:string;
+  dateTime:any;
+}
  
 @Component({
   selector: 'app-testdrive',
   templateUrl: './testdrive.component.html',
   styleUrls: ['./testdrive.component.css']
 })
+ 
+ 
 export class TestdriveComponent implements OnInit {
+
+  Isbook:boolean=true;
   segment_id!: number;
   arr: any[] = [];
   response: any[] = [];
-  selectedSegment: any; 
-  selectedDates: { [carId: string]: string } = {}; 
-  selectedSlots: { [carId: string]: string } = {}; 
+  selectedSegment: any;
+  selectedDates: { [carId: string]: string } = {};
+  selectedSlots: { [carId: string]: string } = {};
   models: any = [];
   testDriveBookingService: any;
   flag: any = false;
   selectedSegmentDetails: any = null;
   isLoading!: boolean;
-
+  isModalOpen=false;
   mindate:string= new Date().toISOString().split('T')[0];
-
-  isModalOpen = false;
-  bookings: any[] = [];
-  bookingDetails: any = null;
+  carHistory: TestdriveBooking[]=[];
+  customer_id:any =localStorage.getItem("customer_id");
  
-
+ 
+ 
   constructor(
     private router: Router,
     private ch: ChangeDetectorRef,
@@ -35,16 +45,16 @@ export class TestdriveComponent implements OnInit {
   ) {}
  
   ngOnInit(): void {
+    // Fetch the segment data
     this.service.getSegments().subscribe((e) => {
       this.response = e;
       this.isLoading = false;
       this.ch.detectChanges();
- 
      const sedanSegment  = this.response.find(segment => segment.segment.toLowerCase() === 'sedan');
     if(sedanSegment){
       this.selectedSegment = sedanSegment.segment_id;
        this.onSelectSegment(this.selectedSegment);
-     } 
+     }
    });
   }
  
@@ -90,17 +100,13 @@ export class TestdriveComponent implements OnInit {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
  
-  onDateChange(car: any): void{
-    if(this.selectedDates[car.testdrive_id]){
-      this.selectedSlots[car.testdrive_id]='';
-    }
-  }
  
  
   bookTestDrive(car: any): void {
     const carId = car.testdrive_id;
     const selectedDate = this.selectedDates[carId];
     const selectedSlot = this.selectedSlots[carId];
+ 
  
     if (!selectedDate || !selectedSlot) {
       alert("Error: Please select both date and time slot.");
@@ -121,7 +127,8 @@ export class TestdriveComponent implements OnInit {
     const formattedDateTimeISO = adjustedDateTime.toISOString();
  
     const testdrive_id = car.testdrive_id;
-    
+   
+ 
     this.service.saveBookings({
       testDrive: { testdrive_id: testdrive_id },
       dateTime: formattedDateTimeISO,
@@ -129,18 +136,7 @@ export class TestdriveComponent implements OnInit {
     }).subscribe(
       (response) => {
         this.flag = true;
-
-        const booking = {
-          car_name: car.car_name,
-          segment: car.segment,
-          date: selectedDate,
-          time: selectedSlot,
-          car_image: car.car_image,
-        };
-        this.bookings.push(booking);
-       
         alert("Your booking has been successfully confirmed!");
-        this.isModalOpen=true;
       },
       (error) => {
         alert("You have already booked a test drive for this car.");
@@ -148,20 +144,43 @@ export class TestdriveComponent implements OnInit {
     );
   }
  
+ 
+  mapBookingData(cars: any[]): TestdriveBooking[] {
+    return cars.map(car => ({
+      image: car.testDrive.car_image,
+      model: car.testDrive.car_name,
+      segment: car.testDrive.testDriveSegments.segment,
+      dateTime: car.dateTime
+    }));
+  }
+ 
+  history(){
+    this.arr=[];
+    this.isModalOpen=true;
+    this.service.getBookingHistory(this.customer_id).subscribe(
+      (cars: any)=>{
+        this.Isbook=true;
+        console.log(cars);
+      
+          this.arr.push(cars);
+        console.log("carhistory")
+        console.log(this.arr);
+        this.carHistory=this.mapBookingData(this.arr);
+        // console.log("after carHistoryMapping"+this.carHistory);
+      },
+      (error) =>{
+        this.Isbook=false;
+        console.error('error in showing history...', error);
+      }
+    )
+  }
+ 
+  closeModal(){
+    this.isModalOpen=false;
+  }
+ 
   goBack(): void {
     this.router.navigate(['/home']);
   }
-
-  closeModal() {
-    this.isModalOpen = false; // Close the modal
-  }
- 
-  selectSlot(slot: string, testdriveId: string): void {
-    if (this.selectedSlots[testdriveId] === slot) {
-      this.selectedSlots[testdriveId] = '';  // Deselect the slot if clicked again
-    } else {
-      this.selectedSlots[testdriveId] = slot;  // Set the selected slot
-    }  }
- 
  
 }
